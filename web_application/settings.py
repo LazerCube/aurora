@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
@@ -24,9 +23,6 @@ SECRET_KEY = '%)ni77bjz+)iqkiiu10aij%i1bxz-$-xyi_*lg7hdeict8vs@*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -53,10 +49,19 @@ MIDDLEWARE_CLASSES = [
 
 ROOT_URLCONF = 'web_application.urls'
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.7/howto/static-files/
+
+STATIC_ROOT = os.path.join(BASE_DIR,'static/')
+STATIC_URL = '/static/'
+
+TEMPLATE_ROOT = (os.path.join(STATIC_ROOT, 'templates/'))
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_ROOT],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -110,20 +115,9 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
-
-STATIC_URL = '/static/'
-STATIC_ROOT = 'staticfiles'
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'templates'),
-)
-
 # Custom Authentication model
 
 AUTH_USER_MODEL = 'authentication.Account'
+
+# Allow all host headers
+ALLOWED_HOSTS = ['*']

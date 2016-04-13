@@ -1,16 +1,9 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from rest_framework_nested import routers
-from authentication.views import AccountViewSet
-
-from web_application.views import IndexView
-
-router = routers.SimpleRouter()
-router.register(r'accounts', AccountViewSet)
+from web_application import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^api/v1/', include(router.urls)),
-    url('^.*$', IndexView.as_view(), name='index'),
+    url(r'^$', views.index, name='templates/index'),
 ]
