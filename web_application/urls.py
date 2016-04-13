@@ -4,6 +4,8 @@ from django.contrib import admin
 from rest_framework_nested import routers
 from authentication.views import AccountViewSet
 
+from web_application.views import IndexView
+
 router = routers.SimpleRouter()
 router.register(r'accounts', AccountViewSet)
 

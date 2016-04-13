@@ -1,0 +1,19 @@
+
+
+{% load compress %}
+{% load staticfiles %}
+
+{% compress js %}
+<script type="text/javascript" src="{% static 'javascripts/jquery/jquery.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'javascripts/components/angular/angular.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/components/angular/angular-cookies.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/components/angular/angular-route.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'javascripts/web_application.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/web_application.config.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/web_application.routes.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/authentication/authentication.module.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/authentication/services/authentication.service.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascripts/authentication/controllers/register.controller.js' %}"></script>
+{% endcompress %}
