@@ -4,6 +4,7 @@ from django.contrib import admin
 from web_application import views
 
 urlpatterns = [
+    url(r'^test_ajax/$', views.test_ajax, name='ajax'),
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.index, name='templates/index'),
+    url(r'^$', views.index, name='index'),
 ]
