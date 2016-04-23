@@ -1,44 +1,54 @@
-from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-import json
+from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.contrib.auth.decorators import login_required
+from django.template import RequestContext
+from .forms import DivErrorList, LoginForm
 
-def test_ajax(request):
-    if request.method == 'POST':
-        post_test = request.POST.get('test')
-        response_data = {}
+from authentication.models import Account
+from django.views.generic.detail import DetailView
+from django.core.urlresolvers import reverse
 
-        response_data['message'] = 'Some error message'
-        response_data['result'] = 'Success!'
-
-        return HttpResponse(
-            json.dumps(response_data),
-            content_type="application/json"
-        )
-    else:
-        return HttpResponseForbidden()
+class UserProfileView(DetailView):
+    model = Account
+    slug_field = "username"
+    template_name = "profiles/user_profile.html"
+    title='User Profile'
 
 def login(request):
-    if request.method =='POST':
-        username = request.POST.get('username', '')
-        password = request.POST.get('password', '')
+    if not request.user.is_authenticated():
+        form = LoginForm()
+        username = ''
+        password = ''
+        state = ''
+        if request.method == 'POST':
+            form = LoginForm(request.POST, error_class=DivErrorList)
+            if form.is_valid():
+                username = form.cleaned_data['username']
+                password = form.cleaned_data['password']
+                user = authenticate(username=username, password=password)
 
-        user = authenticate(username=username, password=password)
+                if user is not None:
+                    if user.is_active:
+                        auth_login(request, user)
+                        print("Logged in")
+                        return HttpResponseRedirect(reverse('user_profile', args=(request.user.username,)))
+                    else:
+                        state = "Your account is not active, please contact the administrator."
 
-        if user is not None:
-            login(request, user)
-            return HttpResponseRedirect('/home')
+                else:
+                    state = "Your username and/or password were incorrect."
 
-        else:
-            print("Failed")
-            return HttpResponseRedirect('/')
+        context = RequestContext(request, {
+                'state': state,
+                'username': username,
+                'form': form,
+                'title':'Login',
+        })
 
+        return render(request, 'web_application/login/login.html', {}, context)
     else:
-        return HttpResponseForbidden()
-
-def home(request):
-    return render(request, 'index/index.html', {})
+        return HttpResponseRedirect(reverse('user_profile', args=(request.user.username,)))
 
 def index(request):
-    return render(request, 'index/index.html', {})
+    return render(request, 'web_application/index/index.html', {})
