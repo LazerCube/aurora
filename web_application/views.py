@@ -55,4 +55,6 @@ def logout(request):
     return HttpResponseRedirect('/')
 
 def index(request):
-    return render(request, 'web_application/index/index.html', {})
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('user_profile', args=(request.user.username,)))
+    return HttpResponseRedirect(reverse('login'))
