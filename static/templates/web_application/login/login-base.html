@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        {% include 'includes/head.html' %}
+    </head>
+
+    <body>
+
+        <div class="navbar">
+            <div class="container">
+                <div class="navbar-header navbar-center">
+                    <div class="navbar-brand">
+                        <a href ="#">Brand Icon</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="box">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </body>
+</html>

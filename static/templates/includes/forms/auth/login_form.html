@@ -1,22 +1,22 @@
+{% load staticfiles %}
 {% block form_content %}
 <!-- display the form -->
-<div class="card-container">
+<div class="login">
+    <div class="card-image">
+        <img src="{% static 'images/backgrounds/MaterialBackground.jpg' %}">
+        <span class="card-title text-bold">Login</span>
+    </div>
     <form action='{% url 'login' %}' method="post" class="form-signin">
-        <div class="login-card">
-            <p class="login-title">Login</p>
+        <div class="card-content">
             {% csrf_token %}
             {{ state }}
             {{ form.username }}
             {{ form.password }}
-             <p class="login-lost-pass"><a href='#forgot password'>Forgot your password</a></p>
+             <button class="btn btn-primary btn-full btn-login" type='submit'>Sign in</button>
         </div>
-        <div class="login-button-card">
-            <a class="btn-login login-register" href='#register'>
-                <p>Register</p>
-            </a>
-            <button class="btn-login login-sign-in" type='submit'>
-                <p>Sign in</p>
-            </button>
+        <div class="card-action">
+            <a class="" href='#register'>Register</a>
+            <a href='#forgot password' class="">Forgot your password</a>
         </div>
     </form>
 </div>

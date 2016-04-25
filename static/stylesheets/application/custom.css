@@ -1,6 +1,70 @@
-.items {
-    float: right;
-    font-size:1.5rem;
-    margin: 30px 0 0 20px;
-    color:#f1f1f1;
+
+.center-text{
+    text-align: center;
+}
+
+.row-centered {
+    text-align:center;
+}
+
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:center;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+
+.card .card-action{
+    text-align: left;
+}
+
+.card .login .card-image{
+    height: 75px;
+    overflow: hidden;
+}
+
+/* Nav */
+
+.navbar-center{
+    float:none!important;
+    text-align: center;
+}
+
+/* signup / signin */
+
+.box{
+    padding-top: 130px;
+    padding-bottom: 50px;
+}
+
+/* Buttons */
+
+.form-input{
+    display: block;
+    width: 100%;
+    color: inherit;
+    height: 50px;
+    padding:0px;
+    font-size: 16px;
+    border: 0px;
+    border-bottom: 1px solid #dadbdf;
+    margin: 15px 0;
+    transition: border 0.5s;
+    appearance: none;
+}
+
+.form-input:placeholder-shown{
+    text-transform: uppercase;
+    letter-spacing: inherit;
+    font-size: 1rem;
+}
+
+input[type="text"]:focus,
+input[type="text"].focus,
+input[type="password"]:focus,
+input[type="password"].focus {
+  border-bottom: solid 1px #45c8dc;
+  outline: none;
 }
