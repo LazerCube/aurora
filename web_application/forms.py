@@ -1,18 +1,5 @@
 from django import forms
-from django.forms.utils import ErrorList
-
-class DivErrorList(ErrorList):
-    def __unicode__(self):
-        return self.as_divs()
-    def as_divs(self):
-        if not self: return ''
-        return '<div class="errorlist">%s</div>' % ''.join(['<div class="error">%s</div>' % e for e in self])
-
-class NameForm(forms.Form):
-    subject = forms.CharField(max_length=100)
-    message = forms.CharField(widget=forms.Textarea)
-    sender = forms.EmailField()
-    cc_myself = forms.BooleanField(required=False)
+from authentication.models import Account
 
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={'id' : 'inputUsername',
@@ -52,14 +39,17 @@ class RegisterForm(forms.Form):
                                                              'class' : 'form-input',
                                                              'placeholder' : 'Password'}))
 
+    class Meta:
+        model = Account
+
     def clean_username(self):
         username = self.cleaned_data['username']
-        if User.objects.exclude(pk=self.instance.pk).filter(username=username).exists():
-            raise forms.ValidationError(u'Username "%s" is already in use.' % username)
+        if Account.objects.filter(username=username).exists():
+            raise forms.ValidationError('The Username, %s is already in use.' % username)
         return username
 
     def clean_email(self):
         email = self.cleaned_data['email']
-        if User.objects.exclude(pk=self.instance.pk).filter(email=email).exists():
-            raise forms.ValidationError(u'Email "%s" is already in use.' % email)
+        if Account.objects.filter(email=email).exists():
+            raise forms.ValidationError('The Email, %s is already in use.' % email)
         return email

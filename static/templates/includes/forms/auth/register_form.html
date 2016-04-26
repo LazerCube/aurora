@@ -9,12 +9,24 @@
     <form action='{% url 'register' %}' method="post" class="form-register">
         <div class="card-content">
             {% csrf_token %}
-            {{ state }}
-            {{ form.first_name }}
-            {{ form.last_name }}
-            {{ form.username }}
-            {{ form.email }}
-            {{ form.password }}
+
+            {% for field in form %}
+                {{ field }}
+                {% if form.errors %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-error">
+                            <small>{{ error|escape }}</small>
+                        </div>
+                    {% endfor %}
+
+                    {% for error in form.non_field_errors %}
+                        <div class="alert alert-error">
+                            <small>{{ error|escape }}</small>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+
              <button class="btn btn-primary btn-full btn-register" type='submit'>Register</button>
         </div>
         <div class="card-action">

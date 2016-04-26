@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
-from .forms import DivErrorList, LoginForm, RegisterForm
+from .forms import LoginForm, RegisterForm
 
 from authentication.models import Account
 from django.views.generic.detail import DetailView
@@ -24,17 +24,15 @@ def register(request):
         last_name = ''
         username = ''
         password = ''
-        state = ''
+        account = None
         if request.method == 'POST':
-            form = RegisterForm(request.POST, error_class=DivErrorList)
+            form = RegisterForm(request.POST)
             if form.is_valid():
                 print("Form is Valid")
+                user = Account.objects.create_user(form.save())
                 return HttpResponseRedirect('/')
-            else:
-                state = "Something was invalid."
 
         context = RequestContext(request, {
-                'state': state,
                 'first_name': first_name,
                 'last_name': last_name,
                 'form': form,
