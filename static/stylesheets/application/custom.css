@@ -20,7 +20,8 @@
     text-align: left;
 }
 
-.card .login .card-image{
+.card .login .card-image,
+.card .register .card-image{
     height: 75px;
     overflow: hidden;
 }
@@ -67,4 +68,18 @@ input[type="password"]:focus,
 input[type="password"].focus {
   border-bottom: solid 1px #45c8dc;
   outline: none;
+}
+
+/* navbar */
+
+.navbar .navbar-header .navbar-brand{
+    padding: 15px 0.9375rem ;
+}
+
+.navbar-nav li:last-child {
+    padding-right: 0.9375rem;
+}
+
+.nav_trigger{
+    margin-left: 0.9375rem;
 }

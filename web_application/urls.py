@@ -7,6 +7,7 @@ from views import UserProfileView
 urlpatterns = [
     url(r'^login/$', views.login, name='login'),
     url(r'^logout/$', views.logout, name='logout'),
-    url(r'^user/(?P<slug>[\w.@+-]+)/$', UserProfileView.as_view(), name='user_profile'),
+    url(r'^register/$', views.register, name='register'),
+    url(r'^profile/(?P<slug>[\w.@+-]+)/$', UserProfileView.as_view(), name='user_profile'),
     url(r'^$', views.index, name='index'),
 ]

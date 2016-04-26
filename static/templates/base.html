@@ -5,11 +5,11 @@
         {% include 'includes/head.html' %}
     </head>
 
-    <body class="">
+    <body class="show_sidebar">
         {% include 'includes/sidebar.html' %}
         <div id="wrapper">
             {% include 'includes/header.html' %}
-            <div class="container" style="padding-top: 95px;">
+            <div class="container-fluid" style="padding-top: 95px;">
                 {% block content %}
                 {% endblock %}
             </div>

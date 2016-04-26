@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
-from .forms import DivErrorList, LoginForm
+from .forms import DivErrorList, LoginForm, RegisterForm
 
 from authentication.models import Account
 from django.views.generic.detail import DetailView
@@ -14,6 +14,35 @@ class UserProfileView(DetailView):
     slug_field = "username"
     template_name = "profiles/user_profile.html"
     title='User Profile'
+
+
+def register(request):
+    if not request.user.is_authenticated():
+        form = RegisterForm()
+        email = ''
+        first_name = ''
+        last_name = ''
+        username = ''
+        password = ''
+        state = ''
+        if request.method == 'POST':
+            form = RegisterForm(request.POST, error_class=DivErrorList)
+            if form.is_valid():
+                print("Form is Valid")
+                return HttpResponseRedirect('/')
+            else:
+                state = "Something was invalid."
+
+        context = RequestContext(request, {
+                'state': state,
+                'first_name': first_name,
+                'last_name': last_name,
+                'form': form,
+                'title':'Register',
+        })
+        return render(request, 'web_application/login/register.html', {}, context)
+    else:
+        return HttpResponseRedirect(reverse('user_profile', args=(request.user.username,)))
 
 def login(request):
     if not request.user.is_authenticated():

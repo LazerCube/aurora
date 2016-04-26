@@ -1,7 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="col-md-8">
-        <h2><b>Hello,</b> {{ user.username }}</h2>
+    <div class="welcome">
+        <div class="row">
+            <div class="col-md-3">
+                <h2><b>Hello,</b> {{ user.username }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="account-info">
+        <div class="row">
+            <div class="col-md-6">
+                <p>
+                    <ul>
+                        <li><b>Name: </b> {{ user.first_name }} {{ user.last_name }}</li>
+                        <li><b>Last updated: </b> {{ user.updated_at }}</li>
+                        <li><b>Created: </b> {{ user.created_at }}</li>
+                        <li><br></li>
+                        <li><b>Email: </b> {{ user.email }}</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
     </div>
 {% endblock %}
