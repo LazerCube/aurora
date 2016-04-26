@@ -17,7 +17,7 @@ class NameForm(forms.Form):
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={'id' : 'inputUsername',
                                                              'class' : 'form-input',
-                                                             'placeholder' : 'Username',
+                                                             'placeholder' : 'Email',
                                                              'autocomplete' : 'off'}),
                                                              max_length=100)
     password= forms.CharField(widget=forms.PasswordInput(attrs={'id' : 'inputPassword',
