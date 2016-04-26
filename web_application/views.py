@@ -29,8 +29,8 @@ def register(request):
             form = RegisterForm(request.POST)
             if form.is_valid():
                 print("Form is Valid")
-                user = Account.objects.create_user(form.save())
-                return HttpResponseRedirect('/')
+                form.save()
+                return HttpResponseRedirect(reverse('user_profile', args=(request.user.username,)))
 
         context = RequestContext(request, {
                 'first_name': first_name,

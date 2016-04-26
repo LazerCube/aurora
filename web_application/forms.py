@@ -53,3 +53,15 @@ class RegisterForm(forms.Form):
         if Account.objects.filter(email=email).exists():
             raise forms.ValidationError('The Email, %s is already in use.' % email)
         return email
+
+    def clean_data(self):
+        first_name = self.cleaned_data['first_name']
+        last_name = self.cleaned_data['first_name']
+        password = self.clean_data['password']
+
+        username = self.clean_username()
+        email = self.clean_email()
+
+    def save(self):
+        clean_data = self.clean_data()
+        user = Account.objects.create_user(email, password, username)
