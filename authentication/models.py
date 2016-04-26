@@ -11,8 +11,15 @@ class AccountManager(BaseUserManager):
         if not kwargs.get('username'):
             raise ValueError('Users must have a valid username.')
 
+        if not kwargs.get('first_name'):
+            first_name = ''
+
+        if not kwargs.get('last_name'):
+            last_name = ''
+
         account = self.model(
-            email=self.normalize_email(email), username=kwargs.get('username')
+            email=self.normalize_email(email), username=kwargs.get('username'),
+            first_name=kwargs.get('first_name'), second_name=kwargs.get('last_name')
         )
 
         account.set_password(password)

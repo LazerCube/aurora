@@ -24,13 +24,21 @@ def register(request):
         last_name = ''
         username = ''
         password = ''
-        account = None
+
         if request.method == 'POST':
             form = RegisterForm(request.POST)
             if form.is_valid():
                 print("Form is Valid")
-                form.save()
-                return HttpResponseRedirect(reverse('user_profile', args=(request.user.username,)))
+                email = form.cleaned_data['email']
+                first_name = form.cleaned_data['first_name']
+                last_name = form.cleaned_data['last_name']
+                username = form.cleaned_data['username']
+                password = form.cleaned_data['password']
+
+                account = Account.objects.create_user(email, password, username=username, first_name=first_name, last_name=last_name)
+
+                return HttpResponseRedirect(reverse('login'))
+
 
         context = RequestContext(request, {
                 'first_name': first_name,
@@ -49,7 +57,7 @@ def login(request):
         password = ''
         state = ''
         if request.method == 'POST':
-            form = LoginForm(request.POST, error_class=DivErrorList)
+            form = LoginForm(request.POST)
             if form.is_valid():
                 username = form.cleaned_data['username']
                 password = form.cleaned_data['password']
