@@ -12,13 +12,18 @@ class FriendManager(models.Manager):
         """ Return a list of all friends """
         print("--------------------------------------------------------")
         print("Friend: ", account.username)
-        friends = Friend.objects.filter(to_user=account.pk)
+        friends = Friend.objects.filter(to_user=account)
         return friends
 
     def requests(self, account):
-        requests = FriendRequest.objects.filter(from_user= account.pk)
-        print("--------------------------------------------------------")
-        print("Friend Requests: ",requests)
+
+        requests = FriendRequest.objects.filter(from_user= account)
+
+        if not FriendRequest.objects.filter(from_user= account).exists():
+            qs = FriendRequest.objects.select_related('from_user', 'to_user').filter(
+                to_user=account).all()
+            requests = list(qs)
+
         return requests
 
 
@@ -55,9 +60,10 @@ class FriendRequest(models.Model):
     class Meta:
         verbose_name = ('Friendship Request')
         verbose_name_plural = ('Friendship Requests')
+        unique_together = ('from_user', 'to_user')
 
     def __str__(self):
-            return "User #%d friend request #%d" % (self.from_user_id, self.to_user_id)
+            return "User %s friend request %s" % (self.from_user, self.to_user)
 
     def accept(self):
         relation1 = Friend.objects.create(

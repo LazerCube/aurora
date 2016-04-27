@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="friends">
+    <div class="friends-requests">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-md-6">
                 <p>
                     </ul>
                     {% for friend in friends %}
-                        <li class="friend">{{ friend }}<li><br>
+                        <li class="friend">{{ friend }}</li>
                     {% endfor %}
                     </ul>
                 </p>

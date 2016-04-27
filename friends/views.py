@@ -15,7 +15,8 @@ def view_friends(request, username):
 def view_requests(request, username):
     user = Account.objects.get(username=username)
     friends = Friend.objects.requests(user)
-    return render(request, 'friends/friends.html', {'friends': friends})
+
+    return render(request, 'friends/requests.html', {'friends': friends})
 
 @login_required
 def add_friends(request, username):
