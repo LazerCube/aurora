@@ -3,6 +3,8 @@ from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import BaseUserManager
 from django.db import models
 
+from django.utils.encoding import python_2_unicode_compatible
+
 class AccountManager(BaseUserManager):
     def create_user(self, email,password=None, **kwargs):
         if not email:
