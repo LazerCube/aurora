@@ -11,10 +11,9 @@ from django.core.urlresolvers import reverse
 
 from authentication.permissions import is_owner
 
-def profile(request, slug):
-    has_permission = is_owner(request, slug)
-
-    profile = get_object_or_404(Account, username=slug)
+def profile(request, username):
+    profile = get_object_or_404(Account, username=username)
+    has_permission = is_owner(request, profile)
     context = {
         'user': profile,
         'has_permission' : has_permission,

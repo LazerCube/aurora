@@ -10,25 +10,28 @@ class FriendManager(models.Manager):
 
     def friends(self, account):
         """ Return a list of all friends """
-        print("--------------------------------------------------------")
-        print("Friend: ", account.username)
-        friends = Friend.objects.filter(to_user=account)
+        friends = Friend.objects.filter(to_user= account)
+
+        if not Friend.objects.filter(to_user= account).exists():
+            qs = Friend.objects.select_related('from_user', 'to_user').filter(to_user=account).all()
+            friends = [u.from_user for u in qs]
+
         return friends
 
     def requests(self, account):
-
         requests = FriendRequest.objects.filter(from_user= account)
-
         if not FriendRequest.objects.filter(from_user= account).exists():
             qs = FriendRequest.objects.select_related('from_user', 'to_user').filter(
                 to_user=account).all()
             requests = list(qs)
-
         return requests
 
-
     def add_friend(self, from_user, to_user, message=None):
-        """ adds a friend """
+        """ sends a friend request """
+
+        if from_user == to_user:
+            raise ValidationError("Users cannot be friends with themselves")
+
         if message is None:
             message = ''
 
@@ -63,9 +66,10 @@ class FriendRequest(models.Model):
         unique_together = ('from_user', 'to_user')
 
     def __str__(self):
-            return "User %s friend request %s" % (self.from_user, self.to_user)
+            return "User ID:%s friend request for ID:%s" % (self.from_user.pk, self.to_user.pk)
 
     def accept(self):
+        print("--ACCEPT--")
         relation1 = Friend.objects.create(
             from_user=self.from_user,
             to_user=self.to_user
@@ -79,7 +83,7 @@ class FriendRequest(models.Model):
         self.delete()
 
         # Delete any reverse requests
-        FriendshipRequest.objects.filter(
+        FriendRequest.objects.filter(
             from_user=self.to_user,
             to_user=self.from_user
         ).delete()
@@ -105,7 +109,7 @@ class Friend(models.Model):
         unique_together = ('from_user', 'to_user')
 
     def __str__(self):
-        return "User #%d is friends with #%d" % (self.to_user_id, self.from_user_id)
+        return "User ID:%d is friends with ID:%d" % (self.to_user_id, self.from_user_id)
 
     def save(self, *args, **kwargs):
         """ Save Friends """
