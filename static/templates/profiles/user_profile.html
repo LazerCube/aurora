@@ -1,20 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+    {% if has_permission %}
     <div class="welcome">
         <div class="row">
-            <div class="col-md-3">
-                <h2><b>Hello,</b> {{ user.username }}</h2>
+            <div class="col-md-4">
+                <h2><b>Hello,</b> {{ user.username }}<br><small>You can edit this page!</small></h2>
             </div>
         </div>
     </div>
+    {% endif %}
 
     <div class="account-info">
         <div class="row">
             <div class="col-md-6">
                 <p>
                     <ul>
-                        <li><b>Name: </b> {{ user.first_name }} {{ user.last_name }}</li>
+                        <li><b>Name: </b> {{ user.get_full_name }}</li>
                         <li><b>Last updated: </b> {{ user.updated_at }}</li>
                         <li><b>Created: </b> {{ user.created_at }}</li>
                         <li><br></li>

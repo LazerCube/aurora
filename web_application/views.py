@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
@@ -9,11 +9,18 @@ from authentication.models import Account
 from django.views.generic.detail import DetailView
 from django.core.urlresolvers import reverse
 
-class UserProfileView(DetailView):
-    model = Account
-    slug_field = "username"
-    template_name = "profiles/user_profile.html"
-    title='User Profile'
+from authentication.permissions import is_owner
+
+def profile(request, slug):
+    has_permission = is_owner(request, slug)
+
+    profile = get_object_or_404(Account, username=slug)
+    context = {
+        'user': profile,
+        'has_permission' : has_permission,
+    }
+
+    return render(request, 'profiles/user_profile.html', context)
 
 
 def register(request):
@@ -28,7 +35,6 @@ def register(request):
         if request.method == 'POST':
             form = RegisterForm(request.POST)
             if form.is_valid():
-                print("Form is Valid")
                 email = form.cleaned_data['email']
                 first_name = form.cleaned_data['first_name']
                 last_name = form.cleaned_data['last_name']
