@@ -20,10 +20,10 @@ class FriendManager(models.Manager):
 
     def requests(self, account):
         requests = FriendRequest.objects.filter(from_user= account)
-        if not FriendRequest.objects.filter(from_user= account).exists():
-            qs = FriendRequest.objects.select_related('from_user', 'to_user').filter(
-                to_user=account).all()
-            requests = list(qs)
+        qs = FriendRequest.objects.select_related('from_user', 'to_user').filter(
+            to_user=account).all()
+        requests = list(requests | qs)
+
         return requests
 
     def add_friend(self, from_user, to_user, message=None):
@@ -66,7 +66,18 @@ class FriendRequest(models.Model):
         unique_together = ('from_user', 'to_user')
 
     def __str__(self):
-            return "User ID:%s friend request for ID:%s" % (self.from_user.pk, self.to_user.pk)
+            return "Request ID:%s (User ID:%s friend request for ID:%s)" % (self.pk ,self.from_user.pk, self.to_user.pk)
+
+    def cancel(self):
+        print("--CANCEL--")
+        self.delete()
+
+        FriendRequest.objects.filter(
+            from_user=self.to_user,
+            to_user=self.from_user
+        ).delete()
+
+        return True
 
     def accept(self):
         print("--ACCEPT--")
@@ -91,9 +102,9 @@ class FriendRequest(models.Model):
         return True
 
     def decline(self):
+        print("REJECT", self.pk)
         self.rejected = timezone.now()
         self.save()
-        return True
 
 @python_2_unicode_compatible
 class Friend(models.Model):

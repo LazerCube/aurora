@@ -2,15 +2,14 @@
 
 {% block content %}
 
-    {% if has_permission %}
+
     <div class="welcome">
         <div class="row">
-            <div class="col-md-4">
-                <h2><b>Hello,</b> {{ user.username }}<br><small>You can edit this page!</small></h2>
+            <div class="col-md-8">
+                <h2>{% if has_permission %}<b>Hello,</b>{% endif %} {{ user.username }}{% if has_permission %}<br><small>You can edit this page!</small>{% endif %}</h2>
             </div>
         </div>
     </div>
-    {% endif %}
 
     <div class="account-info">
         <div class="row">
@@ -22,6 +21,10 @@
                         <li><b>Created: </b> {{ user.created_at }}</li>
                         <li><br></li>
                         <li><b>Email: </b> {{ user.email }}</li>
+                        <li><br></li>
+                        {% if not has_permission %}
+                            <li><a href='/friend/add/{{ user.username }}' class="btn btn-primary">Send Friend Request</a></li>
+                        {% endif %}
                     </ul>
                 </p>
             </div>

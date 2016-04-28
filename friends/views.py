@@ -18,17 +18,32 @@ def view_friends(request):
 def view_requests(request):
     user = request.user
     friends = Friend.objects.requests(user)
-
     return render(request, 'friends/requests.html', {'friends': friends})
 
 @login_required
 def accept_friends(request, friendship_request_id):
-    print("-----------------------------------------------------------")
-
     f_request = get_object_or_404(request.user.friend_requests_received,
         id=friendship_request_id)
 
     f_request.accept()
+
+    return redirect('index')
+
+@login_required
+def cancel_friends(request, friendship_request_id):
+    f_request = get_object_or_404(request.user.friend_requests_sent,
+        id=friendship_request_id)
+
+    f_request.cancel()
+
+    return redirect('index')
+
+@login_required
+def reject_friends(request, friendship_request_id):
+    f_request = get_object_or_404(request.user.friend_requests_received,
+        id=friendship_request_id)
+
+    f_request.decline()
 
     return redirect('index')
 

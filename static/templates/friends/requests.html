@@ -2,16 +2,41 @@
 
 {% block content %}
     <div class="friends-requests">
-        <div class="row">
-            <div class="col-md-6">
-                <p>
-                    </ul>
-                    {% for friend in friends %}
-                        <li class="friend">{{ friend }}</li>
-                    {% endfor %}
-                    </ul>
-                </p>
+        {% for friend in friends %}
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+            {% if friend.from_user == request.user %}
+                <div class="card-content">
+                    <h4>Friend Request Sent<small> {{ friend.created }} </small></h4>
+                    {% if friend.rejected %}
+                    <h4>Rejected<small> {{ friend.rejected }} </small></h4>
+                        <p>
+                            <a href='/profile/{{ friend.to_user.username }}/'><b>{{ friend.to_user.username }}</b></a>
+                            has rejected your friend request.
+                        </p>
+                    {% else %}
+                        <p>A friend request has been sent to <a href='/profile/{{ friend.to_user.username }}/'><b>{{ friend.to_user.username }}</b></a></p>
+                        <p>{{ friend.message }}</p>
+                    {% endif %}
+                </div>
+                <div class="card-action">
+                    <a href="/friend/requests/{{ friend.pk }}/cancel/" class="btn btn-danger btn-sm btn-full">Cancel Friend Request</a>
+                </div>
+            {% else %}
+                {% if not friend.rejected %}
+                <div class="card-content">
+                    <h4>Friend Request<small> {{ friend.created }} </small></h4>
+                    <p><a href='/profile/{{ friend.from_user.username }}/'><b>{{ friend.from_user.username }}</b></a> has sent you a friend request.</p>
+                    <p>{{ friend.message }}</p>
+                </div>
+                <div class="card-action">
+                    <a href="/friend/requests/{{ friend.pk }}/accept/" class="btn btn-primary btn-sm">Confirm As Friend</a>
+                    <a href="/friend/requests/{{ friend.pk }}/reject/" class="btn btn-danger btn-sm">Reject Request</a>
+                </div>
+                {% endif %}
+            {% endif %}
             </div>
         </div>
+        {% endfor %}
     </div>
 {% endblock %}
