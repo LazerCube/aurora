@@ -22,9 +22,7 @@
                         <li><br></li>
                         <li><b>Email: </b> {{ user.email }}</li>
                         <li><br></li>
-                        {% if not has_permission %}
-                            <li><a href='/friend/add/{{ user.username }}' class="btn btn-primary">Send Friend Request</a></li>
-                        {% endif %}
+                        {% include 'friends/includes/friends/add.html' %}
                     </ul>
                 </p>
             </div>

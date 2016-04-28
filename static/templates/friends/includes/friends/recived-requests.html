@@ -1,0 +1,16 @@
+<div class="card-content">
+    <h4>Friend Request<small> {{ friend.created }} </small></h4>
+    <p><a href='/profile/{{ friend.from_user.username }}/'><b>{{ friend.from_user.username }}</b></a> has sent you a friend request.</p>
+    <p>{{ friend.message }}</p>
+</div>
+<div class="card-action">
+    <form method="post" action="{% url 'accept_friends' friend.pk %}">
+        {% csrf_token %}
+        <input class="btn btn-primary btn-sm link" type="submit" value="Confirm As Friend" />
+    </form>
+
+    <form method="post" action="{% url 'reject_friends' friend.pk %}">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-danger btn-sm link" value="Reject Request" />
+    </form>
+</div>

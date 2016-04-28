@@ -22,37 +22,40 @@ def view_requests(request):
 
 @login_required
 def accept_friends(request, friendship_request_id):
-    f_request = get_object_or_404(request.user.friend_requests_received,
-        id=friendship_request_id)
+    if request.method == 'POST':
+        f_request = get_object_or_404(request.user.friend_requests_received,
+            id=friendship_request_id)
 
-    f_request.accept()
+        f_request.accept()
 
     return redirect('index')
 
 @login_required
 def cancel_friends(request, friendship_request_id):
-    f_request = get_object_or_404(request.user.friend_requests_sent,
-        id=friendship_request_id)
+    if request.method == 'POST':
+        f_request = get_object_or_404(request.user.friend_requests_sent,
+            id=friendship_request_id)
 
-    f_request.cancel()
+        f_request.cancel()
 
     return redirect('index')
 
 @login_required
 def reject_friends(request, friendship_request_id):
-    f_request = get_object_or_404(request.user.friend_requests_received,
-        id=friendship_request_id)
+    if request.method == 'POST':
+        f_request = get_object_or_404(request.user.friend_requests_received,
+            id=friendship_request_id)
 
-    f_request.decline()
+        f_request.decline()
 
     return redirect('index')
 
 @login_required
 def add_friends(request, to_username):
     """ View the friends of a user """
-
-    to_user = get_object_or_404(Account, username=to_username)
-    from_user = request.user
-    Friend.objects.add_friend(from_user, to_user)
+    if request.method == 'POST':
+        to_user = get_object_or_404(Account, username=to_username)
+        from_user = request.user
+        Friend.objects.add_friend(from_user, to_user)
 
     return redirect('index')

@@ -1,0 +1,19 @@
+<div class="card-content">
+    <h4>Friend Request Sent<small> {{ friend.created }} </small></h4>
+    {% if friend.rejected %}
+    <h4>Rejected<small> {{ friend.rejected }} </small></h4>
+        <p>
+            <a href='/profile/{{ friend.to_user.username }}/'><b>{{ friend.to_user.username }}</b></a>
+            has rejected your friend request.
+        </p>
+    {% else %}
+        <p>A friend request has been sent to <a href='/profile/{{ friend.to_user.username }}/'><b>{{ friend.to_user.username }}</b></a></p>
+        <p>{{ friend.message }}</p>
+    {% endif %}
+</div>
+<div class="card-action">
+    <form method="post" action="{% url 'cancel_friends' friend.pk %}">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-danger btn-sm btn-full link" value="Cancel Friend Request" />
+    </form>
+</div>

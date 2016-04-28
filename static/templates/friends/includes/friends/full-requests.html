@@ -1,0 +1,16 @@
+
+<div class="requests">
+    {% for friend in friends %}
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+        {% if friend.from_user == request.user %}
+            {% include 'friends/includes/friends/sent-requests.html' %}
+        {% else %}
+            {% if not friend.rejected %}
+                {% include 'friends/includes/friends/recived-requests.html' %}
+            {% endif %}
+        {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>

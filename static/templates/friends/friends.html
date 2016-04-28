@@ -1,17 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+    <div class="title">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Friends List</h1>
+            </div>
+        </div>
+    </div>
+
     <div class="friends">
         <div class="row">
-            <div class="col-lg-6">
-                <p>
-                    </ul>
-                    {% for friend in friends %}
-                        <li class="friend">{{ friend }}</li>
-                    {% endfor %}
-                    </ul>
-                </p>
+            {% for f in friends %}
+            <div class="col-lg-2">
+                <div class="card-panel">
+                    <span>
+                        <ul>
+                            <li>Username: <a href='{% url 'user_profile' f.username %}'>{{ f.username }}</a></li>
+                            <li>Name: {{ f.get_full_name }}</li>
+                        </ul>
+                    </span>
+                </div>
             </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

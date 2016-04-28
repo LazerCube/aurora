@@ -10,11 +10,8 @@ class FriendManager(models.Manager):
 
     def friends(self, account):
         """ Return a list of all friends """
-        friends = Friend.objects.filter(to_user= account)
-
-        if not Friend.objects.filter(to_user= account).exists():
-            qs = Friend.objects.select_related('from_user', 'to_user').filter(to_user=account).all()
-            friends = [u.from_user for u in qs]
+        qs = Friend.objects.select_related('from_user', 'to_user').filter(to_user=account).all()
+        friends = [u.from_user for u in qs]
 
         return friends
 
@@ -39,6 +36,9 @@ class FriendManager(models.Manager):
             from_user=from_user,
             to_user=to_user,
         )
+
+        if created is False:
+            raise AlreadyExistsError("Friendship already requested")
 
         if message:
             request.message = message
