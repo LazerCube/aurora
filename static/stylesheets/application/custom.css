@@ -26,6 +26,12 @@
     overflow: hidden;
 }
 
+/* bg */
+
+.bg {
+  background: url('https://unsplash.it/1855/400/?random')center center;
+}
+
 /* Nav */
 
 .navbar-center{

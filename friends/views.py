@@ -3,13 +3,13 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 
 from authentication.permissions import is_owner
+from friends.exceptions import AlreadyExistsError
 
 from authentication.models import Account
 from models import Friend, FriendRequest
 
 @login_required
 def view_friends(request):
-    """ View the friends of a user """
     user = request.user
     friends = Friend.objects.friends(user)
     return render(request, 'friends/friends.html', {'friends': friends})
@@ -38,7 +38,7 @@ def cancel_friends(request, friendship_request_id):
 
         f_request.cancel()
 
-    return redirect('index')
+    return redirect('view_requests')
 
 @login_required
 def reject_friends(request, friendship_request_id):
@@ -48,14 +48,30 @@ def reject_friends(request, friendship_request_id):
 
         f_request.decline()
 
-    return redirect('index')
+    return redirect('view_requests')
 
 @login_required
 def add_friends(request, to_username):
-    """ View the friends of a user """
     if request.method == 'POST':
         to_user = get_object_or_404(Account, username=to_username)
         from_user = request.user
-        Friend.objects.add_friend(from_user, to_user)
 
-    return redirect('index')
+        content = {"user": to_user}
+
+        try:
+            Friend.objects.add_friend(from_user, to_user)
+        except Exception as e:
+            content['errors'] = ["%s" %(e)]
+        else:
+            return redirect('view_requests')
+
+    return render(request, 'profiles/user_profile.html', content)
+
+@login_required
+def remove_friend(request, friend_username):
+    if request.method == 'POST':
+        to_user = get_object_or_404(Account, username=friend_username)
+        from_user = request.user
+        Friend.objects.remove_friend(from_user, to_user)
+
+    return redirect('view_friends')

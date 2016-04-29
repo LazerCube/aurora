@@ -2,14 +2,16 @@ from __future__ import unicode_literals
 from django.db import models
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
+from django.db.models import Q
+
+from django.core.exceptions import ValidationError
+from friends.exceptions import AlreadyExistsError, AlreadyFriendsError
 
 from authentication.models import Account
 
 class FriendManager(models.Manager):
-    """ Friendship manager """
 
     def friends(self, account):
-        """ Return a list of all friends """
         qs = Friend.objects.select_related('from_user', 'to_user').filter(to_user=account).all()
         friends = [u.from_user for u in qs]
 
@@ -24,10 +26,11 @@ class FriendManager(models.Manager):
         return requests
 
     def add_friend(self, from_user, to_user, message=None):
-        """ sends a friend request """
-
         if from_user == to_user:
             raise ValidationError("Users cannot be friends with themselves")
+
+        if self.are_friends(from_user, to_user):
+            raise AlreadyFriendsError("Users are already friends")
 
         if message is None:
             message = ''
@@ -46,9 +49,31 @@ class FriendManager(models.Manager):
 
         return request
 
-    def are_friends(self, account1, account2):
-        """ Checks if two users are friends """
-        return false
+    def remove_friend(self, to_user, from_user):
+        try:
+            qs = Friend.objects.filter(
+                Q(to_user=to_user, from_user=from_user) |
+                Q(to_user=from_user, from_user=to_user)
+            ).distinct().all()
+
+            print(qs)
+
+            if qs:
+                qs.delete()
+                return True
+            else:
+                return False
+
+        except Friend.DoesNotExist:
+            return False
+
+    def are_friends(self, user1, user2):
+        try:
+            Friend.objects.get(to_user=user2, from_user=user1)
+            return True
+        except Friend.DoesNotExist:
+            return False
+
 
 @python_2_unicode_compatible
 class FriendRequest(models.Model):
@@ -69,7 +94,6 @@ class FriendRequest(models.Model):
             return "Request ID:%s (User ID:%s friend request for ID:%s)" % (self.pk ,self.from_user.pk, self.to_user.pk)
 
     def cancel(self):
-        print("--CANCEL--")
         self.delete()
 
         FriendRequest.objects.filter(
@@ -80,7 +104,6 @@ class FriendRequest(models.Model):
         return True
 
     def accept(self):
-        print("--ACCEPT--")
         relation1 = Friend.objects.create(
             from_user=self.from_user,
             to_user=self.to_user
@@ -102,7 +125,6 @@ class FriendRequest(models.Model):
         return True
 
     def decline(self):
-        print("REJECT", self.pk)
         self.rejected = timezone.now()
         self.save()
 
@@ -123,7 +145,6 @@ class Friend(models.Model):
         return "User ID:%d is friends with ID:%d" % (self.to_user_id, self.from_user_id)
 
     def save(self, *args, **kwargs):
-        """ Save Friends """
         if self.to_user == self.from_user:
             raise ValidationError("Users cannot be friends with themselves.")
         super(Friend, self).save(*args, **kwargs)
