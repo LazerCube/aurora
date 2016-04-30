@@ -38,7 +38,7 @@ def cancel_friends(request, friendship_request_id):
 
         f_request.cancel()
 
-    return redirect('view_requests')
+    return redirect('friends:view_requests')
 
 @login_required
 def reject_friends(request, friendship_request_id):
@@ -48,7 +48,7 @@ def reject_friends(request, friendship_request_id):
 
         f_request.decline()
 
-    return redirect('view_requests')
+    return redirect('friends:view_requests')
 
 @login_required
 def add_friends(request, to_username):
@@ -63,7 +63,7 @@ def add_friends(request, to_username):
         except Exception as e:
             content['errors'] = ["%s" %(e)]
         else:
-            return redirect('view_requests')
+            return redirect('friends:view_requests')
 
     return render(request, 'profiles/user_profile.html', content)
 
@@ -74,4 +74,4 @@ def remove_friend(request, friend_username):
         from_user = request.user
         Friend.objects.remove_friend(from_user, to_user)
 
-    return redirect('view_friends')
+    return redirect('friends:view_friends')

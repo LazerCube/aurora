@@ -1,6 +1,6 @@
 {% if errors %}<p>{{ errors|join:", " }}</p>{% endif %}
 <br>
-<form method="post" action="{% url 'remove_friend' f.username %}">
+<form method="post" action="{% url 'friends:remove_friend' f.username %}">
     {% csrf_token %}
     <input class="btn btn-danger btn-full"type="submit" value="Remove Friend" />
 </form>
