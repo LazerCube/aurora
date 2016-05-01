@@ -28,7 +28,7 @@ def accept_friends(request, friendship_request_id):
 
         f_request.accept()
 
-    return redirect('index')
+    return redirect('user_profile:index')
 
 @login_required
 def cancel_friends(request, friendship_request_id):
@@ -65,7 +65,7 @@ def add_friends(request, to_username):
         else:
             return redirect('friends:view_requests')
 
-    return render(request, 'profiles/user_profile.html', content)
+    return render(request, 'user_profiles/user_profile.html', content)
 
 @login_required
 def remove_friend(request, friend_username):
