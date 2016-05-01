@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'authentication',
     'user_profiles',
     'friends',
+    'chat',
 ]
 
 MIDDLEWARE_CLASSES = [
