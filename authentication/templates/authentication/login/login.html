@@ -1,11 +1,10 @@
-{% extends "web_application/login/login-base.html" %}
-{% include "includes/forms/auth/login_form.html" %}
+{% extends "authentication/base.html" %}
 
 {% block content %}
     <div class="row row-centered">
         <div class="col-lg-5 col-centered">
             <div class="card">
-                {% include "includes/forms/auth/login_form.html" %}
+                {% include "authentication/forms/login_form.html" %}
             </div>
         </div>
     </div>

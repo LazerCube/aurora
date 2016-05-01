@@ -53,14 +53,14 @@ ROOT_URLCONF = 'web_application.urls'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
-STATIC_URL = '/static/' #specifies what url should static files map to under
-
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR,'static/'),
+    os.path.join(BASE_DIR,'static'),
 ) #specifies all the folders on your system where Django should look for static files
 
-STATIC_ROOT = (os.path.join(BASE_DIR, 'static_root/')) # This setting specifies where Django will copy all the static files to
-STATIC_TEMPLATES = (os.path.join(BASE_DIR, 'static/templates/'))
+STATIC_URL = '/static/' #specifies what url should static files map to under
+
+STATIC_ROOT = (os.path.join(BASE_DIR, 'static_root')) # This setting specifies where Django will copy all the static files to
+STATIC_TEMPLATES = (os.path.join(BASE_DIR, 'templates/'))
 
 TEMPLATES = [
     {

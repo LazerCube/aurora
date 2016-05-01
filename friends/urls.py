@@ -1,5 +1,5 @@
 from django.conf.urls import include, url
-from friends import views
+from . import views
 
 app_name = 'friends'
 urlpatterns = [
