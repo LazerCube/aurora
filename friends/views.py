@@ -28,7 +28,7 @@ def accept_friends(request, friendship_request_id):
 
         f_request.accept()
 
-    return redirect('user_profile:index')
+    return redirect('friends:view_requests')
 
 @login_required
 def cancel_friends(request, friendship_request_id):

@@ -37,7 +37,7 @@ def register(request):
         })
         return render(request, 'authentication/login/register.html', context)
     else:
-        return redirect('user_profile', request.user.username)
+        return redirect('authenticate:login', request.user.username)
 
 def login(request):
     if not request.user.is_authenticated():
@@ -56,7 +56,7 @@ def login(request):
                     if user.is_active:
                         auth_login(request, user)
                         print("Logged in")
-                        return redirect('user_profile', request.user.username)
+                        return redirect('user_profile:index', request.user.username)
                     else:
                         state = "Your account is not active, please contact the administrator."
 
@@ -72,7 +72,7 @@ def login(request):
 
         return render(request, 'authentication/login/login.html', context)
     else:
-        return redirect('user_profile', request.user.username)
+        return redirect('user_profile:index', request.user.username)
 
 def logout(request):
     auth_logout(request)
