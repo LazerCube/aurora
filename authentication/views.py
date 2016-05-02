@@ -26,7 +26,7 @@ def register(request):
 
                 account = Account.objects.create_user(email, password, username=username, first_name=first_name, last_name=last_name)
 
-                return redirect('authenticate:login')
+                return redirect('authentication:login')
 
 
         context = RequestContext(request, {
@@ -37,7 +37,7 @@ def register(request):
         })
         return render(request, 'authentication/login/register.html', context)
     else:
-        return redirect('authenticate:login', request.user.username)
+        return redirect('authentication:login', request.user.username)
 
 def login(request):
     if not request.user.is_authenticated():

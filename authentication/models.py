@@ -55,8 +55,8 @@ class Account(AbstractBaseUser):
     USERNAME_FIELD = 'email' #Djangos built in user requires a username. This is used to log in the user.
     REQUIRED_FIELDS = ['username'] #will need to use username in URL so we must have it.
 
-    def __unicode__(self):
-        return self.email
+    def __str__(self):
+        return self.username
 
     def get_full_name(self):
         return ' '.join([self.first_name, self.second_name])

@@ -91,7 +91,7 @@ class FriendRequest(models.Model):
         unique_together = ('from_user', 'to_user')
 
     def __str__(self):
-            return "Request ID:%s (User ID:%s friend request for ID:%s)" % (self.pk ,self.from_user.pk, self.to_user.pk)
+        return "Request ID:%s (User ID:%s friend request for ID:%s)" % (self.pk ,self.from_user.pk, self.to_user.pk)
 
     def cancel(self):
         self.delete()

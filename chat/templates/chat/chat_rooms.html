@@ -3,21 +3,27 @@
 {% block content %}
     <div class="chat_rooms">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-2">
                 <h2>Chat Rooms</h2>
             </div>
         </div>
         <div class="row">
-            <div class="col=md=8">
+            {% for r in rooms %}
+            <div class="col-lg-2 col-md-4">
                 <ul>
-                    {% if rooms %}
-                        {% for r in rooms %}
-                        <li>{ r }</li>
-                        {% endfor %}
-                    {% endif %}
+                    <li><h4>{{ r.name }}</h4></li>
+                    <li><b>Room ID:</b> {{ r.id }}</li>
+                    <li><b>Description:</b> {{ r.description }}</li>
+                    <li><b>Extra:{{ r. }}</b></li>
+                    <br>
+                    <a href='{% url 'chat:view_chat' r.pk %}' class="btn btn-primary btn-sm btn-full">Click to view chat</a>
                 </ul>
+                <br>
             </div>
+            {% endfor %}
         </div>
-        {% include 'chat/includes/create_room.html' %}
+        <div class="row">
+            {% include 'chat/includes/create_room.html' %}
+        </div>
     </div>
 {% endblock %}

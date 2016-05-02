@@ -125,5 +125,6 @@ USE_TZ = True
 
 AUTH_USER_MODEL = 'authentication.Account'
 
+
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
