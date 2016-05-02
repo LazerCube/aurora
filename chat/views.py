@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 
 from authentication.models import Account
-from models import Room
+from chat.models import Room, Message
 from forms import CreateNewChatRoom
 
 from django.template import RequestContext
@@ -12,7 +12,7 @@ def view_chatrooms(request):
     name = ""
     description = ""
 
-    rooms = Room.objects.rooms(request.user)
+    rooms = Room.objects.get.all()
     form = CreateNewChatRoom()
 
     if request.method == 'POST':
@@ -28,7 +28,9 @@ def view_chatrooms(request):
             # else:
             #     return redirect('chat:view_chatrooms')
 
-            Room.objects.create_room(request.user, name, description)
+            u = request.user.pk
+            r = Room.objects.get_or_create(u, name, description)
+
             return redirect('chat:view_chatrooms')
 
     content = RequestContext(request, {
@@ -47,3 +49,23 @@ def view_chat(request,chatroom_id):
     })
 
     return render(request, 'chat/conversation.html', content)
+
+@login_required
+def send(request):
+    '''recives messages sent and links to corresponding room model'''
+
+@login_required
+def sync(requst):
+    '''will get the last message sent to chat. so you can't see msg from before you joinned'''
+
+@login_required
+def receive(requst):
+    '''called by the client javacript code, returns a list of messages sent'''
+
+@login_required
+def join(request):
+    '''called when a user joins a chat room'''
+
+@login_required
+def leave(request):
+    '''called when a user leaves a chat room'''
