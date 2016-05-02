@@ -7,15 +7,17 @@ from django.contrib.contenttypes.models import ContentType, ContentTypeManager
 from django.contrib.contenttypes.fields import GenericForeignKey
 
 class RoomManager(models.Manager):
-    def create(self, object, name, desc=None):
+    def create(self, object):
         '''Creates a new chat room and registers it to the calling object'''
+        name = "Room_Test"
+        desc = "Test"
         r = self.model(content_object=object, name=name, description=desc)
         r.save()
         return r
 
     def get_for_object(self, object):
         '''Try to get a room related to the object passed'''
-        return self.get(content_type=ContentType.objects.get_for(object), object_id=object.pk)
+        return self.get(content_type=ContentType.objects.get_for_model(object), object_id=object.pk)
 
     def get_or_create(self, object):
         '''see if object exists if not create a room if none exists'''

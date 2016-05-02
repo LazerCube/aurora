@@ -12,7 +12,7 @@ def view_chatrooms(request):
     name = ""
     description = ""
 
-    rooms = Room.objects.get.all()
+    rooms = Room.objects.all()
     form = CreateNewChatRoom()
 
     if request.method == 'POST':
@@ -28,8 +28,8 @@ def view_chatrooms(request):
             # else:
             #     return redirect('chat:view_chatrooms')
 
-            u = request.user.pk
-            r = Room.objects.get_or_create(u, name, description)
+            u = request.user
+            r = Room.objects.get_or_create(u)
 
             return redirect('chat:view_chatrooms')
 
