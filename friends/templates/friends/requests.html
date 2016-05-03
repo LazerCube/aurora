@@ -2,11 +2,15 @@
 
 {% block content %}
 
-    <div class="friend-requests">
+<div class="friend-requests">
+    <div class="row">
         <div class="col-lg-12">
             <h1>Friend Requests</h1>
         </div>
-    {% include 'friends/includes/friends/full-requests.html' %}
     </div>
+    <div class="row">
+        {% include 'friends/includes/friends/full-requests.html' %}
+    </div>
+</div>
 
 {% endblock %}

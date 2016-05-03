@@ -3,7 +3,7 @@
     <ul>
     {% for m in messages %}
         <li>
-            <span>{{ m.author.username }}:   </span>
+            <span><b><a href='{% url 'user_profile:index' request.user.username %}'>{{ m.author.username }}:</a></b>   </span>
             {{ m }}<br><small>{{ m.timestamp }}</small>
         </li>
     {% endfor %}
