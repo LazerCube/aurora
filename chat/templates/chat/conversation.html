@@ -1,16 +1,21 @@
 {% extends "web_application/base.html" %}
 
 {% block content %}
-    <div class="chat_rooms">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>{{ chatroom.name }}<br><small> {{ chatroom.description }}</small></h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                {% include 'chat/includes/messages.html' %}
-                {% include 'chat/forms/chat_input.html' %}
+    <div class="chat">
+        <div class="row row-centered">
+            <div class="col-lg-6 col-centered col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title"><b>{{ chatroom.name }}</b></span>
+                        <p>{{ chatroom.description }}</p>
+                    </div>
+                    <div class="card-content card-line">
+                        {% include 'chat/includes/messages.html' %}
+                    </div>
+                    <div class="card-action">
+                        {% include 'chat/forms/chat_input.html' %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

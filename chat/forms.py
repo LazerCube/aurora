@@ -16,7 +16,8 @@ class CreateNewChatRoom(forms.Form):
 
 class CreateMessage(forms.Form):
     message = forms.CharField(widget=forms.Textarea(attrs={'id' : 'inputMessage',
-                                                            'class' : 'form-input',
-                                                            'placeholder' : 'Message',
-                                                            'autocomplete' : 'off'}),
+                                                            'class' : 'formtext',
+                                                            'placeholder' : 'Type your message',
+                                                            'autocomplete' : 'off',
+                                                            'rows':'2'}),
                                                             max_length=512)

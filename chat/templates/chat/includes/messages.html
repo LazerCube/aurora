@@ -1,12 +1,17 @@
-<div class="messages">
-    <h4 class="text-fancy">Messages</h4><hr>
-    <ul>
+<ul class="messages">
     {% for m in messages %}
-        <li>
-            <span><b><a href='{% url 'user_profile:index' request.user.username %}'>{{ m.author.username }}:</a></b>   </span>
-            {{ m }}<br><small>{{ m.timestamp }}</small>
+        {% if m.author == request.user %}
+            <li class="self">
+        {% else %}
+            <li>
+        {% endif %}
+            <div class="head">
+                <span class="time">{{ m.timestamp }}</span>
+                <span class="name"><a href='{% url 'user_profile:index' request.user.username %}'>{{ m.author.username }}</a></span>
+            </div>
+            <div class="message">
+                {{ m }}
+            </div>
         </li>
     {% endfor %}
-    </ul>
-    <hr>
-</div>
+</ul>
