@@ -30,6 +30,16 @@
 
 .bg {
   background: url('https://unsplash.it/1855/400/?random')center center;
+  background-color: #dadbdf;
+}
+
+/* Cards */
+
+.card .card-action a,
+.card .card-action .link {
+  margin-right: 20px;
+  text-transform: uppercase;
+  text-decoration: none;
 }
 
 /* Nav */
@@ -62,12 +72,19 @@
     appearance: none;
 }
 
+a.btn {
+    color: #ffffff;
+    text-decoration:none;
+}
+
 .form-input:placeholder-shown{
     text-transform: uppercase;
     letter-spacing: inherit;
     font-size: 1rem;
 }
 
+textarea:focus,
+textarea.focus,
 input[type="text"]:focus,
 input[type="text"].focus,
 input[type="password"]:focus,

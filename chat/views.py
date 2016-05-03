@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 
 from authentication.models import Account
 from chat.models import Room, Message
-from forms import CreateNewChatRoom
+from forms import CreateNewChatRoom, CreateMessage
 
 from django.template import RequestContext
 
@@ -21,15 +21,8 @@ def view_chatrooms(request):
             name = form.cleaned_data['name']
             description = form.cleaned_data['description']
 
-            # try:
-            #     Room.objects.create_room(user, name, description)
-            # except Exception as e:
-            #     content['errors'] = ["%s" %(e)]
-            # else:
-            #     return redirect('chat:view_chatrooms')
-
             u = request.user
-            r = Room.objects.get_or_create(u)
+            r = Room.objects.get_or_create(u, name, description)
 
             return redirect('chat:view_chatrooms')
 
@@ -42,17 +35,35 @@ def view_chatrooms(request):
 
 @login_required
 def view_chat(request,chatroom_id):
-    chatroom = get_object_or_404(Room, pk=chatroom_id)
+    r = get_object_or_404(Room, pk=chatroom_id)
+    m = r.messages()
+    f = CreateMessage()
 
-    content = RequestContext(request, {
-            'chatroom': chatroom,
-    })
+    print(m)
+
+    if request.method == 'POST':
+        f = CreateMessage(request.POST)
+        if f.is_valid():
+            message = f.cleaned_data['message']
+            r.say(request.user, message)
+            print("MESSAGE SENT")
+
+            return redirect('chat:view_chat', r.pk)
+
+    content = {
+            'chatroom': r,
+            'messages': m,
+            'form': f,
+    }
 
     return render(request, 'chat/conversation.html', content)
 
 @login_required
-def send(request):
+def send(request, chatroom_id):
     '''recives messages sent and links to corresponding room model'''
+
+
+
 
 @login_required
 def sync(requst):

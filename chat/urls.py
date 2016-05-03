@@ -5,4 +5,5 @@ app_name = 'chat'
 urlpatterns = [
     url(r'^$', views.view_chatrooms, name='view_chatrooms'),
     url(r'^conversation/(?P<chatroom_id>\d+)$', views.view_chat, name='view_chat'),
+    url(r'^conversation/(?P<chatroom_id>\d+)/send$', views.send, name='send'),
 ]

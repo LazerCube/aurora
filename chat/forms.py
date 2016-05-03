@@ -14,4 +14,9 @@ class CreateNewChatRoom(forms.Form):
                                                              'autocomplete' : 'off'}),
                                                               max_length=128)
 
-    #subscribers = forms.ModelMultipleChoiceField(queryset=Friend.objects.friends(self.request.user))
+class CreateMessage(forms.Form):
+    message = forms.CharField(widget=forms.Textarea(attrs={'id' : 'inputMessage',
+                                                            'class' : 'form-input',
+                                                            'placeholder' : 'Message',
+                                                            'autocomplete' : 'off'}),
+                                                            max_length=512)

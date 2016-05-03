@@ -7,10 +7,9 @@ from django.contrib.contenttypes.models import ContentType, ContentTypeManager
 from django.contrib.contenttypes.fields import GenericForeignKey
 
 class RoomManager(models.Manager):
-    def create(self, object):
+    def create(self, object, name, desc):
         '''Creates a new chat room and registers it to the calling object'''
-        name = "Room_Test"
-        desc = "Test"
+
         r = self.model(content_object=object, name=name, description=desc)
         r.save()
         return r
@@ -19,12 +18,12 @@ class RoomManager(models.Manager):
         '''Try to get a room related to the object passed'''
         return self.get(content_type=ContentType.objects.get_for_model(object), object_id=object.pk)
 
-    def get_or_create(self, object):
+    def get_or_create(self, object, name, desc):
         '''see if object exists if not create a room if none exists'''
         try:
             return self.get_for_object(object)
         except Room.DoesNotExist:
-            return self.create(object)
+            return self.create(object, name, desc)
 
 class Room(models.Model):
     name = models.CharField(max_length=64)
@@ -42,6 +41,8 @@ class Room(models.Model):
     def create_message(self, type, sender, message=None):
         '''Function for adding messages into the chat room'''
         m = Message(room=self, type=type, author=sender, message=message)
+        m.save()
+        print(m)
 
     def say(self, sender, message):
         '''Says something into the chat'''
@@ -57,11 +58,12 @@ class Room(models.Model):
 
     def messages(self, after_pk=None, after_date=None):
         '''List messages, after the given id or date'''
-        m = message.objects.filter(room=self)
+        m = Message.objects.filter(room=self)
         if after_pk:
             m = m.filter(pk__gt=after_pk)
         if after_date:
             m = m.filter(timestamp__gte=after_date)
+        print(m.order_by('pk'))
         return m.order_by('pk')
 
     def last_message_id(self):
@@ -71,6 +73,10 @@ class Room(models.Model):
             return m[0].id
         else:
             return 0
+
+    def message_num(self):
+        '''Retuns number of messages in the room'''
+        return Message.objects.filter(room=self).count()
 
     def __unicode__(self):
         return 'Chat for %s %d' % (self.content_type, self.object_id)

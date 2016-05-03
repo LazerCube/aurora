@@ -13,10 +13,9 @@
                 <ul>
                     <li><h4>{{ r.name }}</h4></li>
                     <li><b>Room ID:</b> {{ r.id }}</li>
-                    <li><b>Description:</b> {{ r.description }}</li>
-                    <li><b>Extra:{{ r. }}</b></li>
+                    <li><b>Messages:</b> {{ r.message_num }}</li>
                     <br>
-                    <a href='{% url 'chat:view_chat' r.pk %}' class="btn btn-primary btn-sm btn-full">Click to view chat</a>
+                    <a href='{% url 'chat:view_chat' r.pk %}' class="btn btn-success btn-sm btn-full">Click to view chat</a>
                 </ul>
                 <br>
             </div>

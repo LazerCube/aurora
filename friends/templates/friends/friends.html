@@ -18,7 +18,7 @@
                     <span>
                         <ul>
                             {% if errors %}<li>{{ errors|join:", " }}</li>{% endif %}
-                            <li>Username: <a href="{% url 'user_profile:index' user.username %}">{{ f.username }}</a></li>
+                            <li>Username: <a href="{% url 'user_profile:index' f.username %}">{{ f.username }}</a></li>
                             <li>Name: {{ f.get_full_name }}</li>
                             <li>{% include 'friends/includes/friends/remove.html' %}</li>
                         </ul>

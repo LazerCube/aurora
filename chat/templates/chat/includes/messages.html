@@ -1,0 +1,12 @@
+<div class="messages">
+    <h4 class="text-fancy">Messages</h4><hr>
+    <ul>
+    {% for m in messages %}
+        <li>
+            <span>{{ m.author.username }}:   </span>
+            {{ m }}<br><small>{{ m.timestamp }}</small>
+        </li>
+    {% endfor %}
+    </ul>
+    <hr>
+</div>

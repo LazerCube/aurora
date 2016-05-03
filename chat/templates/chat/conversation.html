@@ -3,13 +3,14 @@
 {% block content %}
     <div class="chat_rooms">
         <div class="row">
-            <div class="col-md-4">
-                <h2>Chat Room {{ chatroom.name }}</h2>
+            <div class="col-md-12">
+                <h2>{{ chatroom.name }}<br><small> {{ chatroom.description }}</small></h2>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-2 col-md-4">
-                {{ chatroom.subscribers.all }}
+            <div class="col-md-6">
+                {% include 'chat/includes/messages.html' %}
+                {% include 'chat/forms/chat_input.html' %}
             </div>
         </div>
     </div>

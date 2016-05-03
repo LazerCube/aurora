@@ -1,0 +1,15 @@
+{% load staticfiles %}
+
+{% block form_content %}
+<!-- display the form -->
+<div class="message">
+    <form action='{% url 'chat:view_chat' chatroom.pk %}' method="post" class="form-message">
+        <div class="card-content">
+            {% csrf_token %}
+            {{ form.message }}
+            <button class="btn btn-primary btn-full btn-login" type='submit'>Send</button>
+        </div>
+    </form>
+</div>
+<!-- end display the form -->
+{% endblock %}
