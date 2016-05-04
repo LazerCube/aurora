@@ -1,6 +1,27 @@
 body{
 }
 
+/*
+ *  Scroll bar
+ */
+
+.messages::-webkit-scrollbar-track
+{
+
+}
+
+.messages::-webkit-scrollbar
+{
+	width: 8px;
+}
+
+.messages::-webkit-scrollbar-thumb
+{
+	border-radius: 6px;
+	background-color: #DADBDF;
+}
+
+
 .center-text{
     text-align: center;
 }
@@ -62,18 +83,31 @@ body{
 /* Buttons */
 
 .form-input{
-    display: block;
-    width: 100%;
     color: inherit;
-    height: 50px;
-    padding:0px;
-    font-size: 16px;
-    border: 0px;
-    border-bottom: 1px solid #dadbdf;
-    margin: 15px 0;
     transition: border 0.5s;
+    height: 50px;
+    margin-bottom: 15px;
+    width: 100%;
+    padding: 0px!important;
+    outline: none;
     appearance: none;
+    border: none;
+    resize: none;
+    display: block;
+    border-bottom: 2px solid #dadbdf;
 }
+
+textarea.form-input{
+    height: 75px;
+}
+
+textarea.chat-input{
+    height: 75px;
+    margin-bottom: 15px;
+    width: 100%;
+    padding: 15px!important;
+}
+
 
 a.btn {
     color: #ffffff;
@@ -81,7 +115,7 @@ a.btn {
 }
 
 .form-input:placeholder-shown{
-    text-transform: uppercase;
+    text-transform: capitalize;
     letter-spacing: inherit;
     font-size: 1rem;
 }
@@ -94,17 +128,6 @@ input[type="password"]:focus,
 input[type="password"].focus {
   border-bottom: solid 2px #45c8dc!important;
   outline: none;
-}
-
-textarea.formtext{
-    resize: none;
-    height: 75px;
-    margin-bottom: 15px;
-    width: 100%;
-    outline: none;
-    padding: 15px!important;
-    border: none;
-    resize: none;
 }
 
 /* navbar */
@@ -125,7 +148,6 @@ textarea.formtext{
 
 .jumbotron{
     margin-top:65px;
-    margin-top:145px;
     margin-bottom: 0px;
 }
 
@@ -137,25 +159,6 @@ textarea.formtext{
 
 .navbar .navbar-header{
     line-height: 2rem;
-    display: inline-block;
-}
-
-.page-banner{
-    margin-top:65px;
-    height:80px;
-    background-color: #f7f8f8;
-}
-
-.page-banner.navbar .navbar-header {
-    height:80px;
-}
-
-.page-banner.navbar .navbar-header .navbar-brand{
-    line-height: 1.6;
-}
-
-.navbar-brand a{
-    color: #838999!important;
 }
 
 /* Chat */
@@ -163,6 +166,7 @@ textarea.formtext{
 .chat .card{
     background: #f8f8f8;
     text-align: left;
+    box-shadow: none;
 }
 
 .card-line{
@@ -171,12 +175,12 @@ textarea.formtext{
 
 .chat .messages{
     height:355px;
-    overflow: auto;
+    overflow-y: scroll;
     outline: none;
 }
 
 .chat .messages li{
-    margin: 10px 0px;
+    margin: 10px;
 }
 
 .chat .messages li:after {
