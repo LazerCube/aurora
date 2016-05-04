@@ -1,17 +1,15 @@
-<ul id="auto-scroll" class="messages">
-    {% for m in messages %}
-        {% if m.author == request.user %}
-            <li class="self">
-        {% else %}
-            <li>
-        {% endif %}
-            <div class="head">
-                <span class="time">{{ m.timestamp }}</span>
-                <span class="name"><a href='{% url 'user_profile:index' request.user.username %}'>{{ m.author.username }}</a></span>
-            </div>
-            <div class="message">
-                {{ m }}
-            </div>
-        </li>
-    {% endfor %}
-</ul>
+{% for m in messages %}
+    {% if m.author == request.user %}
+        <li class="self">
+    {% else %}
+        <li>
+    {% endif %}
+        <div class="head">
+            <span class="time">{{ m.timestamp }}</span>
+            <span class="name"><a href='{% url 'user_profile:index' request.user.username %}'>{{ m.author.username }}</a></span>
+        </div>
+        <div class="message" id="{{ m.pk }}">
+            {{ m }}
+        </div>
+    </li>
+{% endfor %}

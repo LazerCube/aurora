@@ -10,7 +10,8 @@
                         <p>{{ chatroom.description }}</p>
                     </div>
                     <div class="card-content card-line">
-                        {% include 'chat/includes/messages.html' %}
+                        <ul id="auto-scroll" class="messages">
+                        </ul>
                     </div>
                     <div class="card-action">
                         {% include 'chat/forms/chat_input.html' %}

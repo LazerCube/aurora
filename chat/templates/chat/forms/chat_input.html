@@ -2,9 +2,10 @@
 
 {% block form_content %}
 <!-- display the form -->
-<form action='{% url 'chat:view_chat' chatroom.pk %}' method="post" class="form-message">
+<form action='{% url 'chat:view_chat' chatroom.pk %}' method="POST" id="form-message">
     {% csrf_token %}
     {{ form.message }}
+    <input type="hidden" id="returntoken" value="{{ chatroom.pk }}">
     <button class="btn btn-primary btn-lg btn-full" type='submit'>Send</button>
 </form>
 <!-- end display the form -->

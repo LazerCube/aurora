@@ -7,6 +7,10 @@ from forms import CreateNewChatRoom, CreateMessage
 
 from django.template import RequestContext
 
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+import json
+
 @login_required
 def view_chatrooms(request):
     name = ""
@@ -36,47 +40,92 @@ def view_chatrooms(request):
 @login_required
 def view_chat(request,chatroom_id):
     r = get_object_or_404(Room, pk=chatroom_id)
-    m = r.messages()
     f = CreateMessage()
-
-    print(m)
-
-    if request.method == 'POST':
-        f = CreateMessage(request.POST)
-        if f.is_valid():
-            message = f.cleaned_data['message']
-            r.say(request.user, message)
-            print("MESSAGE SENT")
-
-            return redirect('chat:view_chat', r.pk)
 
     content = {
             'chatroom': r,
-            'messages': m,
             'form': f,
     }
 
     return render(request, 'chat/conversation.html', content)
 
 @login_required
-def send(request, chatroom_id):
+def send(request):
     '''recives messages sent and links to corresponding room model'''
+    if request.method == 'POST':
+        response_data = {}
+        room_id = request.POST.get('room_id')
+        message = request.POST.get('message')
 
+        r = get_object_or_404(Room, pk=room_id)
 
+        r.say(request.user, message)
+        print("MESSAGE SENT")
 
+        response_data['response'] = 'Create message successful!'
+
+        return HttpResponse(
+            json.dumps(response_data), content_type="application/json")
+
+    else:
+        return HttpResponse(
+            json.dumps({ Error : "Something went wrong."}),
+            content_type="application/json"
+        )
 
 @login_required
-def sync(requst):
-    '''will get the last message sent to chat. so you can't see msg from before you joinned'''
+def sync(request):
+    '''will get the last message sent to chat.'''
+    if request.method == 'POST':
+        response_data = {}
+        room_id = request.POST.get('room_id')
+        last_id = request.POST.get('last_id')
+
+        r = get_object_or_404(Room, pk=room_id)
+        m = r.messages(after_pk=last_id)
+
+        content = {
+            'messages': m,
+            'request': request,
+        }
+
+        response_data = render_to_string('chat/includes/messages.html', content)
+        return HttpResponse(response_data)
+
+    else:
+        return HttpResponse(
+            json.dumps({ Error : "Something went wrong."}),
+            content_type="application/json"
+        )
 
 @login_required
-def receive(requst):
+def receive(request):
     '''called by the client javacript code, returns a list of messages sent'''
+    if request.method == 'POST':
+        response_data = {}
+        room_id = request.POST.get('room_id')
 
-@login_required
-def join(request):
-    '''called when a user joins a chat room'''
+        r = get_object_or_404(Room, pk=room_id)
+        m = r.messages()
 
-@login_required
-def leave(request):
-    '''called when a user leaves a chat room'''
+        content = {
+            'messages': m,
+            'request': request,
+        }
+
+        response_data = render_to_string('chat/includes/messages.html', content)
+        return HttpResponse(response_data)
+
+    else:
+        return HttpResponse(
+            json.dumps({ Error : "Something went wrong."}),
+            content_type="application/json"
+        )
+
+# @login_required
+# def join(request):
+#     '''called when a user joins a chat room'''
+#
+# @login_required
+# def leave(request):
+#     '''called when a user leaves a chat room'''
