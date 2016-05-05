@@ -1,27 +1,20 @@
-<!DOCTYPE html>
+{% extends "web_application/base.html" %}
 
-<html>
-    <head>
-        {% include 'web_application/includes/head.html' %}
-    </head>
-
-    <body>
-
-        <div class="navbar">
-            <div class="container">
-                <div class="navbar-header navbar-center">
-                    <div class="navbar-brand">
-                        <a href ="#">Brand Icon</a>
-                    </div>
+{% block body %}
+    <div class="navbar">
+        <div class="container">
+            <div class="navbar-header navbar-center">
+                <div class="navbar-brand">
+                    <a href ="#">Brand Icon</a>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="container">
-            <div class="box">
-                {% block content %}
-                {% endblock %}
-            </div>
+    <div class="container">
+        <div class="box">
+            {% block content %}
+            {% endblock %}
         </div>
-    </body>
-</html>
+    </div>
+{% endblock %}
