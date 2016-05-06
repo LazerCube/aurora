@@ -7,11 +7,37 @@ from friends.exceptions import AlreadyExistsError
 from authentication.models import Account
 from models import Friend, FriendRequest
 
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+import json
+
+@login_required
+def list_friends(request):
+    '''returns html element for lising friends'''
+    if request.method == 'POST':
+        response_data = {}
+
+        user = request.user
+        friends = Friend.objects.friends(user)
+
+        content = {
+            'friends': friends,
+        }
+
+        response_data = render_to_string('friends/includes/friends.html', content)
+        return HttpResponse(response_data)
+    else:
+        return HttpResponse(
+            json.dumps({ Error : "Something went wrong."}),
+            content_type="application/json"
+        )
+
+
 @login_required
 def view_friends(request):
     user = request.user
     friends = Friend.objects.friends(user)
-    return render(request, 'friends/friends.html', {'friends': friends})
+    return render(request, 'friends/view_friends.html', {'friends': friends})
 
 @login_required
 def view_requests(request):

@@ -1,5 +1,26 @@
 body{
+    background-color: #f0f0f0;
 }
+
+
+#content-wrapper{
+	padding-top:65px;
+}
+
+.page-content{
+	margin-right: 0px;
+}
+
+@media (min-width: 992px){
+	.page-content{
+		margin-right: 200px;
+	}
+
+	.friends-list{
+		display: block!important;
+	}
+}
+
 
 /*
  *  Scroll bar
@@ -95,6 +116,7 @@ body{
     resize: none;
     display: block;
     border-bottom: 2px solid #dadbdf;
+	background-color: #f8f8f8!important;
 }
 
 textarea.form-input{
@@ -108,6 +130,9 @@ textarea.chat-input{
     padding: 15px!important;
 }
 
+.btn{
+	overflow: hidden;
+}
 
 a.btn {
     color: #ffffff;
@@ -126,11 +151,35 @@ input[type="text"]:focus,
 input[type="text"].focus,
 input[type="password"]:focus,
 input[type="password"].focus {
-  border-bottom: solid 2px #45c8dc!important;
-  outline: none;
+	border-bottom: solid 2px #45c8dc!important;
+	outline: none;
 }
 
 /* navbar */
+
+#push_sidebar {
+	transition: all .5s ease;
+}
+
+#wrapper {
+    transition: none;
+}
+
+@media (min-width: 992px){
+	#push_sidebar {
+		transition: none;
+	}
+	body.show_sidebar #wrapper{
+		margin-left: 200px;
+	}
+}
+
+body.show_sidebar .navbar-fixed-bottom, body.show_sidebar .navbar-fixed-top {
+    margin: inherit;
+    z-index: 998;
+	transition: none;
+}
+
 
 .navbar .navbar-header .navbar-brand{
     padding: 15px 0.9375rem ;
@@ -147,8 +196,9 @@ input[type="password"].focus {
 /* Jumbo */
 
 .jumbotron{
-    margin-top:65px;
-    margin-bottom: 0px;
+	margin: 15px 0;
+	display: block;
+	border-radius: .3rem;
 }
 
 .jumbotron .container{
@@ -163,6 +213,13 @@ input[type="password"].focus {
 
 /* Chat */
 
+.card{
+	background-color: #f8f8f8;
+	box-shadow: none;
+	border-radius: 0.3rem;
+	border: 2px solid #dadbdf;
+}
+
 .chat .card{
     background: #f8f8f8;
     text-align: left;
@@ -170,12 +227,18 @@ input[type="password"].focus {
 }
 
 .card-line{
-    border-top: 1px solid #dadbdf;
+    border-top: 2px solid #dadbdf;
+}
+
+.card .card-action{
+	border-top: 2px solid #dadbdf;
 }
 
 .chat .messages{
     height:355px;
     overflow-y: scroll;
+	overflow-x: hidden;
+	text-overflow: ellipsis;;
     outline: none;
 }
 
@@ -250,4 +313,73 @@ input[type="password"].focus {
     border-bottom: 12px solid #62bf6e;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
+}
+
+/* Friends list */
+.friends-list{
+	margin-top: 65px;
+	width: 200px;
+	font-size: 1rem;
+	position: fixed;
+	right: 0px;
+	top: 0;
+	height: 100%;
+	z-index: 999;
+	border-left: 2px solid #dadbdf;
+	display: none;
+}
+
+ul.friends li{
+	position: relative;
+}
+
+.title{
+	font-size: 1.8rem;
+	font-weight: bold;
+	text-align: center;
+	line-height: 2;
+	height: 80px!important;
+	padding: 15px!important;
+}
+
+ul.friends li.friend{
+	background-color: #f0f0f0;
+	border-bottom: 1px solid #dadbdf;
+}
+
+ul.friends li.friend a{
+	line-height: 30px;
+	overflow: hidden;
+	padding: 5px 0;
+	display: block;
+	width: 100%;
+	height: 40px;
+}
+
+ul.friends li.friend a{
+	text-decoration: none;
+	color: inherit;
+}
+
+ul.friends li.friend a:hover{
+	background-color: #dadbdf;
+}
+
+.friend-container{
+	padding-left: 12px;
+	position: relative;
+}
+
+.friend-container .friend-img{
+	float:left;
+	height: 30px;
+	position: relative;
+	width:30;
+}
+
+.friend-container .friend-text{
+	overflow: hidden;
+    padding-left: 8px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

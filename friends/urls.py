@@ -3,6 +3,7 @@ from . import views
 
 app_name = 'friends'
 urlpatterns = [
+    url(r'^list/$', views.list_friends, name='list_friends'),
     url(r'^$', views.view_friends, name='view_friends'),
     url(r'^requests/$', views.view_requests, name='view_requests'),
     url(r'^add/(?P<to_username>[\w.@+-]+)$', views.add_friends, name='add_friend'),

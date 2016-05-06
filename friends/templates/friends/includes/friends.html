@@ -1,0 +1,25 @@
+
+{% if friends %}
+    {% for f in friends %}
+        <li class="friend">
+            <a href='{% url 'user_profile:index' f.username %}'>
+                <div class="friend-container">
+                    <div class="friend-img">
+                        <img src="http://placehold.it/32/45c8dc/45c8dc" alt="img" height="30" width="30"/>
+                    </div>
+                    <div class="friend-text">
+                        {{ f.username }}
+                    </div>
+                </div>
+            </a>
+        </li>
+    {% endfor %}
+{% else %}
+    <li class="friend">
+        <div class="friend-container">
+            <p>
+                Sorry, you currently have no friends:(
+            </p>
+        </div>
+    </li>
+{% endif %}

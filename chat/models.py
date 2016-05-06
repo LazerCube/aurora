@@ -42,7 +42,6 @@ class Room(models.Model):
         '''Function for adding messages into the chat room'''
         m = Message(room=self, type=type, author=sender, message=message)
         m.save()
-        print(m)
 
     def say(self, sender, message):
         '''Says something into the chat'''
@@ -63,7 +62,6 @@ class Room(models.Model):
             m = m.filter(pk__gt=after_pk)
         if after_date:
             m = m.filter(timestamp__gte=after_date)
-        print(m.order_by('pk'))
         return m.order_by('pk')
 
     def last_message_id(self):

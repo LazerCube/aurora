@@ -8,6 +8,9 @@ from django.core.exceptions import ValidationError
 from friends.exceptions import AlreadyExistsError, AlreadyFriendsError
 
 from authentication.models import Account
+from chat.models import Room
+
+from django.contrib.auth.models import Group
 
 class FriendManager(models.Manager):
 
@@ -121,6 +124,11 @@ class FriendRequest(models.Model):
             from_user=self.to_user,
             to_user=self.from_user
         ).delete()
+
+        # name = (("%s-%s") %(self.from_user.username, self.to_user.username))
+        # description = "Personal message"
+        #
+        # r = Room.objects.get_or_create(relation1, name, description)
 
         return True
 
