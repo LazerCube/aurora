@@ -121,5 +121,7 @@ USE_TZ = True
 
 AUTH_USER_MODEL = 'authentication.Account'
 
+LOGIN_URL = '/login/'
+
 # Allow all host headers
 ALLOWED_HOSTS = ['localhost']
