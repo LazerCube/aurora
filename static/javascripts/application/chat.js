@@ -9,6 +9,14 @@ $(function() {
         send();
     });
 
+    $('.on-enter').keydown(function (event) {
+        var keypressed = event.keyCode || event.which;
+        if (keypressed == 13) {
+            event.preventDefault();
+            send();
+        }
+    });
+
     setInterval(function() {
         console.log("CHECK UPDATE")
         sync();

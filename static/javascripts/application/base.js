@@ -1,4 +1,5 @@
 $(function() {
+
     // This function gets cookie with a given name
     function getCookie(name) {
         var cookieValue = null;
