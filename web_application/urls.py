@@ -10,3 +10,6 @@ urlpatterns = [
     url(r'^messages/', include('chat.urls')),
     url(r'^$', views.index, name='index'),
 ]
+
+handler404 = 'web_application.views.handler404'
+handler500 = 'web_application.views.handler505'

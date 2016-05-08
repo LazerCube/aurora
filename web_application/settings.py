@@ -23,7 +23,6 @@ SECRET_KEY = '%)ni77bjz+)iqkiiu10aij%i1bxz-$-xyi_*lg7hdeict8vs@*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -62,7 +61,7 @@ ROOT_URLCONF = 'web_application.urls'
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR,'static'),
+    os.path.join(BASE_DIR, 'static'),
 ) #specifies all the folders on your system where Django should look for static files
 
 STATIC_URL = '/static/' #specifies what url should static files map to under
@@ -133,4 +132,4 @@ AUTH_USER_MODEL = 'authentication.Account'
 
 
 # Allow all host headers
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost']

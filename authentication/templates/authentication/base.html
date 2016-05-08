@@ -5,16 +5,17 @@
         <div class="container">
             <div class="navbar-header navbar-center">
                 <div class="navbar-brand">
-                    <a href ="#">Brand Icon</a>
+                    <a href ="#">Brand Name</a>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="container">
-        <div class="box">
-            {% block content %}
-            {% endblock %}
-        </div>
+        {% block content %}
+        {% endblock %}
     </div>
+{% endblock %}
+
+{% block js-head %}
 {% endblock %}

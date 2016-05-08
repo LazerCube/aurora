@@ -1,0 +1,10 @@
+{% extends "authentication/base.html" %}
+
+{% block content %}
+<div class="jumbotron error">
+    <div class="container center-text">
+        <h1 class="fancy-text">{{ error_code }}</h1>
+        <p class="fancy-text">{{ error }}</p>
+    </div>
+</div>
+{% endblock %}

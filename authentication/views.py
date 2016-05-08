@@ -29,12 +29,12 @@ def register(request):
                 return redirect('authentication:login')
 
 
-        context = RequestContext(request, {
+        context = {
                 'first_name': first_name,
                 'last_name': last_name,
                 'form': form,
                 'title':'Register',
-        })
+        }
         return render(request, 'authentication/login/register.html', context)
     else:
         return redirect('authentication:login', request.user.username)
@@ -63,17 +63,18 @@ def login(request):
                 else:
                     state = "Your username and/or password were incorrect."
 
-        context = RequestContext(request, {
+        context = {
                 'state': state,
                 'username': username,
                 'form': form,
                 'title':'Login',
-        })
+        }
 
         return render(request, 'authentication/login/login.html', context)
     else:
         return redirect('user_profile:index', request.user.username)
 
 def logout(request):
+    print("LOG OUT")
     auth_logout(request)
-    return redirect('/')
+    return redirect('authentication:login')
