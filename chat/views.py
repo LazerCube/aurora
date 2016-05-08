@@ -11,12 +11,15 @@ from django.http import HttpResponse
 from django.template.loader import render_to_string
 import json
 
+from guardian.shortcuts import get_objects_for_user
+from guardian.core import ObjectPermissionChecker
+
 @login_required
 def view_chatrooms(request):
     name = ""
     description = ""
 
-    rooms = Room.objects.all()
+    rooms = get_objects_for_user(request.user, 'chat.view_room')
     form = CreateNewChatRoom()
 
     if request.method == 'POST':
@@ -40,14 +43,18 @@ def view_chatrooms(request):
 @login_required
 def view_chat(request,chatroom_id):
     r = get_object_or_404(Room, pk=chatroom_id)
-    f = CreateMessage()
+    checker = ObjectPermissionChecker(request.user)
+    if checker.has_perm('view_room', r):
+        f = CreateMessage()
 
-    content = {
-            'chatroom': r,
-            'form': f,
-    }
+        content = {
+                'chatroom': r,
+                'form': f,
+        }
 
-    return render(request, 'chat/conversation.html', content)
+        return render(request, 'chat/conversation.html', content)
+    else:
+        return redirect('chat:view_chatrooms')
 
 @login_required
 def send(request):

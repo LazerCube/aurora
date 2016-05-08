@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
 from django.db import models
 
@@ -37,7 +38,7 @@ class AccountManager(BaseUserManager):
 
         return account
 
-class Account(AbstractBaseUser):
+class Account(AbstractBaseUser,PermissionsMixin):
     email = models.EmailField(unique=True) #Needs to be unique for login
     username = models.CharField(max_length=32, unique=True) #Needs to be unique for URL
 

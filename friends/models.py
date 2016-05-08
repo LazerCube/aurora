@@ -11,8 +11,15 @@ from authentication.models import Account
 from chat.models import Room
 
 from django.contrib.auth.models import Group
+from guardian.shortcuts import assign_perm
+from guardian.shortcuts import remove_perm
 
 class FriendManager(models.Manager):
+
+    def get_group_name(self, to_user, from_user):
+        x = [from_user.username, to_user.username]
+        y = (("%s-%s") %(sorted(x)[0], sorted(x)[1]))
+        return y
 
     def friends(self, account):
         qs = Friend.objects.select_related('from_user', 'to_user').filter(to_user=account).all()
@@ -63,6 +70,13 @@ class FriendManager(models.Manager):
 
             if qs:
                 qs.delete()
+                name = Friend.objects.get_group_name(to_user, from_user)
+                g = Group.objects.get(name=name)
+                r = Room.objects.get(name=name)
+                remove_perm('view_room', to_user, g)
+                remove_perm('view_room', from_user, g)
+                g.delete()
+                r.delete()
                 return True
             else:
                 return False
@@ -125,10 +139,16 @@ class FriendRequest(models.Model):
             to_user=self.from_user
         ).delete()
 
-        # name = (("%s-%s") %(self.from_user.username, self.to_user.username))
-        # description = "Personal message"
-        #
-        # r = Room.objects.get_or_create(relation1, name, description)
+        name = Friend.objects.get_group_name(self.to_user, self.from_user)
+        description = "Personal message"
+
+        g = Group.objects.create(name=name)
+        r = Room.objects.create(g, name, description)
+
+        assign_perm('view_room', g, r)
+
+        self.to_user.groups.add(g)
+        self.from_user.groups.add(g)
 
         return True
 
