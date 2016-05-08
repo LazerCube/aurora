@@ -6,6 +6,8 @@ from authentication.models import Account
 from django.contrib.contenttypes.models import ContentType, ContentTypeManager
 from django.contrib.contenttypes.fields import GenericForeignKey
 
+
+
 class RoomManager(models.Manager):
     def create(self, object, name, desc):
         '''Creates a new chat room and registers it to the calling object'''
@@ -34,6 +36,11 @@ class Room(models.Model):
     description = models.TextField(blank=True, null=True)
 
     objects = RoomManager() # custom manager
+
+    class Meta:
+        permissions = (
+            ('view_room', 'View room'),
+        )
 
     def __str__(self):
         return "Room ID:%d | Name:%s | Desc:%s" % (self.pk, self.name, self.description)
