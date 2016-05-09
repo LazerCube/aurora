@@ -1,8 +1,10 @@
 {% if not user.username == request.user.username %}
-    {% if errors %}<p>{{ errors|join:", " }}</p>{% endif %}
-    <form method="post" action="{% url 'friends:add_friend' user.username %}">
-        {% csrf_token %}
-        <input type="hidden" name="to_username" value="{{ to_username }}" />
-        <input class="btn btn-primary"type="submit" value="Send Friend Request" />
-    </form>
+    {% if not are_friends %}
+        {% if errors %}<p>{{ errors|join:", " }}</p>{% endif %}
+        <form method="post" action="{% url 'friends:add_friend' user.username %}">
+            {% csrf_token %}
+            <input type="hidden" name="to_username" value="{{ to_username }}" />
+            <input class="btn btn-primary"type="submit" value="Send Friend Request" />
+        </form>
+    {% endif%}
 {% endif %}
