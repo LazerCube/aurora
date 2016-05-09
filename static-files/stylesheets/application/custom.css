@@ -86,13 +86,19 @@ body{
   text-decoration: none;
 }
 
-.card .card-action form{
+.card .card-action form.display-inline{
     display: inline-block;
 }
 
-.card .card-action form .btn{
+.btn-full{
+    margin-left: 0px!important;
+    margin-right: 0px!important;
+}
+
+.card .card-action .btn{
     margin-right: 10px;
 }
+
 
 
 /* Nav */

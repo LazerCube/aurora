@@ -6,7 +6,7 @@
     {% endif %}
         <div class="head">
             <span class="time">{{ m.timestamp }}</span>
-            <span class="name"><a href='{% url 'user_profile:index' request.user.username %}'>{{ m.author.username }}</a></span>
+            <span class="name"><a href='{% url 'user_profile:index' m.author.username %}'>{{ m.author.username }}</a></span>
         </div>
         <div class="message" id="{{ m.pk }}">
             {{ m }}
