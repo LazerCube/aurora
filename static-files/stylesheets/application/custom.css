@@ -333,6 +333,15 @@ ul.friends li{
 	position: relative;
 }
 
+ul.friends .title{
+	font-size: 1.8rem;
+	font-weight: bold;
+	text-align: center;
+	line-height: 2;
+	height: 80px!important;
+	padding: 15px!important;
+}
+
 ul.friends li.friend{
 	background-color: #f0f0f0;
 	border-bottom: 1px solid #dadbdf;
