@@ -6,3 +6,6 @@
 
 # Node modules
 node_modules/
+
+# Static folder
+static_root/
