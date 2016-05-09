@@ -1,0 +1,402 @@
+body{
+    background-color: #f0f0f0;
+}
+
+
+#content-wrapper{
+	padding-top:65px;
+}
+
+.page-content{
+	margin-right: 0px;
+}
+
+@media (min-width: 992px){
+	.page-content{
+		margin-right: 200px;
+	}
+
+	.friends-list{
+		display: block!important;
+	}
+}
+
+
+/*
+ *  Scroll bar
+ */
+
+.messages::-webkit-scrollbar-track
+{
+
+}
+
+.messages::-webkit-scrollbar
+{
+	width: 8px;
+}
+
+.messages::-webkit-scrollbar-thumb
+{
+	border-radius: 6px;
+	background-color: #DADBDF;
+}
+
+
+.center-text{
+    text-align: center;
+}
+
+.row-centered {
+    text-align:center;
+}
+
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:center;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+
+.card .card-action{
+    text-align: left;
+}
+
+.card .login .card-image,
+.card .register .card-image{
+    height: 75px;
+    overflow: hidden;
+}
+
+/* bg */
+
+.bg {
+  background: url('https://unsplash.it/1855/400/?random')center center;
+  background-color: #dadbdf;
+}
+
+/* Cards */
+
+.card .card-action a,
+.card .card-action .link {
+  margin-right: 20px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+
+/* Nav */
+
+.navbar-center{
+    float:none!important;
+    text-align: center;
+}
+
+/* signup / signin */
+
+.box{
+    padding-top: 130px;
+    padding-bottom: 50px;
+}
+
+/* Buttons */
+
+.form-input{
+    color: inherit;
+    transition: border 0.5s;
+    height: 50px;
+    margin-bottom: 15px;
+    width: 100%;
+    padding: 0px!important;
+    outline: none;
+    appearance: none;
+    border: none;
+    resize: none;
+    display: block;
+    border-bottom: 2px solid #dadbdf;
+	background-color: #f8f8f8!important;
+}
+
+textarea.form-input{
+    height: 75px;
+}
+
+textarea.chat-input{
+    height: 75px;
+    margin-bottom: 15px;
+    width: 100%;
+    padding: 15px!important;
+}
+
+.btn{
+	overflow: hidden;
+}
+
+a.btn {
+    color: #ffffff;
+    text-decoration:none;
+}
+
+.form-input:placeholder-shown{
+    text-transform: capitalize;
+    letter-spacing: inherit;
+    font-size: 1rem;
+}
+
+textarea:focus,
+textarea.focus,
+input[type="text"]:focus,
+input[type="text"].focus,
+input[type="password"]:focus,
+input[type="password"].focus {
+	border-bottom: solid 2px #45c8dc!important;
+	outline: none;
+}
+
+/* navbar */
+
+#push_sidebar {
+	transition: all .5s ease;
+}
+
+#wrapper {
+    transition: none;
+}
+
+@media (min-width: 992px){
+	#push_sidebar {
+		transition: none;
+	}
+	body.show_sidebar #wrapper{
+		margin-left: 200px;
+	}
+}
+
+body.show_sidebar .navbar-fixed-bottom, body.show_sidebar .navbar-fixed-top {
+    margin: inherit;
+    z-index: 998;
+	transition: none;
+}
+
+
+.navbar .navbar-header .navbar-brand{
+    padding: 15px 0.9375rem ;
+}
+
+.navbar-nav li:last-child {
+    padding-right: 0.9375rem;
+}
+
+.nav_trigger{
+    margin-left: 0.9375rem;
+}
+
+/* Jumbo */
+
+.jumbotron{
+	margin: 15px 0;
+	display: block;
+	border-radius: .3rem;
+}
+
+.jumbotron .container{
+    min-height: 200px;
+}
+
+/* Page-banner */
+
+.navbar .navbar-header{
+    line-height: 2rem;
+}
+
+/* Chat */
+
+.card{
+	background-color: #f8f8f8;
+	box-shadow: none;
+	border-radius: 0.3rem;
+	border: 2px solid #dadbdf;
+}
+
+.chat .card{
+    background: #f8f8f8;
+    text-align: left;
+    box-shadow: none;
+}
+
+.card-line{
+    border-top: 2px solid #dadbdf;
+}
+
+.card .card-action{
+	border-top: 2px solid #dadbdf;
+}
+
+.chat .messages{
+    height:355px;
+    overflow-y: scroll;
+	overflow-x: hidden;
+	text-overflow: ellipsis;;
+    outline: none;
+}
+
+.chat .messages li{
+    margin: 10px;
+}
+
+.chat .messages li:after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+.chat .messages li .head{
+    font-size: .85rem;
+}
+
+.chat .messages li .head {
+    text-align: right;
+}
+
+.chat .messages li.self .head {
+    text-align: left;
+}
+
+.chat .messages li .name {
+    font-weight: bold;
+}
+
+.chat .messages li .time {
+    color: #b7bccf;
+}
+
+.chat .messages li .message{
+    background-color: #45c8dc;
+    float: right;
+}
+
+.chat .messages li .message:before {
+    right: 16px;
+    border-bottom-color: #45c8dc!important;
+}
+
+.chat .messages li.self .message{
+    background-color: #62bf6e;
+    float: left;
+}
+
+.chat .messages li.self .message:before {
+    left: 16px;
+    border-bottom-color: #62bf6e!important;
+}
+
+.chat .messages li .message {
+    margin-top: 20px;
+    color: #fff;
+    font-size: 15px;
+    border-radius: 3px;
+    padding: 20px;
+    line-height: 25px;
+    max-width: 500px;
+    word-wrap: break-word;
+    position: relative;
+}
+
+.chat .messages li .message:before {
+    content: '';
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    top: -12px;
+    border-bottom: 12px solid #62bf6e;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+}
+
+/* Friends list */
+.friends-list{
+	margin-top: 65px;
+	width: 200px;
+	font-size: 1rem;
+	position: fixed;
+	right: 0px;
+	top: 0;
+	height: 100%;
+	z-index: 999;
+	border-left: 2px solid #dadbdf;
+	display: none;
+}
+
+ul.friends li{
+	position: relative;
+}
+
+.title{
+	font-size: 1.8rem;
+	font-weight: bold;
+	text-align: center;
+	line-height: 2;
+	height: 80px!important;
+	padding: 15px!important;
+}
+
+ul.friends li.friend{
+	background-color: #f0f0f0;
+	border-bottom: 1px solid #dadbdf;
+}
+
+ul.friends li.friend a{
+	line-height: 30px;
+	overflow: hidden;
+	padding: 5px 0;
+	display: block;
+	width: 100%;
+	height: 40px;
+}
+
+ul.friends li.friend a{
+	text-decoration: none;
+	color: inherit;
+}
+
+ul.friends li.friend a:hover{
+	background-color: #dadbdf;
+}
+
+.friend-container{
+	padding-left: 12px;
+	position: relative;
+}
+
+.friend-container .friend-img{
+	float:left;
+	height: 30px;
+	position: relative;
+	width:30;
+}
+
+.friend-container .friend-text{
+	overflow: hidden;
+    padding-left: 8px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 404 505 */
+
+.error{
+	padding:22.5%;
+	background-color: #666;
+	background: url("http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/stardust.png");
+}
+
+
+.fancy-text{
+	font-weight: bold!important;
+	text-shadow: 0px 1px 0px rgba(255,255,255,.5); /* 50% white from bottom */
+	color: #f1f1f1!important;
+	text-transform: capitalize;
+    font-size:4rem;
+}
