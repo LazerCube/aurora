@@ -16,5 +16,5 @@ DATABASES = {
     }
 }
 
-#ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '178.62.1.158']
 STATIC_URL = '/static/'
