@@ -25,8 +25,8 @@
         <!--endhead-->
     </head>
 
-    <body class="show_sidebar">
-        {% block body %}
+    {% block body %}
+        <body class="show_sidebar">
             {% include 'web_application/includes/sidebar.html' %}
             <div id="wrapper">
                 {% include 'web_application/includes/header.html' %}
@@ -38,6 +38,7 @@
                     </div>
                 </div>
             </div>
-        {% endblock %}
-    </body>
+        </body>
+    {% endblock %}
+
 </html>

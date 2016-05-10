@@ -1,10 +1,26 @@
 {% extends "authentication/base.html" %}
 
+{% block body-class %}
+    <body class="blue-bg">
+{% endblock %}
+
 {% block content %}
-<div class="jumbotron error">
-    <div class="container center-text">
-        <h1 class="fancy-text">{{ error_code }}</h1>
-        <p class="fancy-text">{{ error }}</p>
+    <div class="error-page">
+        <div class="row row-centered">
+            <div class="col-lg-6 col-md-8 col-centered">
+                <h1>{{ error_code }}</h1>
+            </div>
+        </div>
+        <div class="row row-centered">
+            <div class="col-lg-4 col-md-5 col-xs-8 col-centered">
+                <p>
+                    Oops, Sorry
+                </p>
+
+                <p>
+                    {{ message }}
+                </p>
+            </div>
+        </div>
     </div>
-</div>
 {% endblock %}

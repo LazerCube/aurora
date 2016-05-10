@@ -400,17 +400,26 @@ ul.friends li.friend a:hover{
 
 /* 404 505 */
 
-.error{
-	padding:22.5%;
-	background-color: #666;
-	background: url("http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/stardust.png");
+.blue-bg{
+    background-color: #45c8dc;
+    color: #ffffff;
 }
 
+.error-page{
+    padding-top: 100px;
+}
 
-.fancy-text{
-	font-weight: bold!important;
-	text-shadow: 0px 1px 0px rgba(255,255,255,.5); /* 50% white from bottom */
-	color: #f1f1f1!important;
-	text-transform: capitalize;
-    font-size:4rem;
+.error-page h1 {
+    font-size: 8rem;
+    margin-top: 32px;
+}
+
+@media (min-width: 786px){
+    .error-page h1 {
+        font-size: 15rem;
+    }
+}
+
+.error-page p{
+    margin: 0 0 10px;
 }

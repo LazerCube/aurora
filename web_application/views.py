@@ -7,11 +7,11 @@ def index(request):
     return redirect('authentication:login')
 
 def handler404(request):
-    msg = "Page Not Found."
+    msg = "We couldn't find the page you were looking for."
 
     context = {
         'error_code': 404,
-        'error': msg,
+        'message': msg,
     }
 
     return render(request, 'web_application/errorhandler.html', context)
@@ -22,7 +22,7 @@ def handler500(request):
 
     context = {
         'error_code': 500,
-        'error': msg,
+        'message': msg,
     }
 
     return render(request, 'web_application/errorhandler.html', context)
