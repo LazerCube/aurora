@@ -1,6 +1,6 @@
 from web_application.settings import *
 
-DEBUG = False
+DEBUG = True
 
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
