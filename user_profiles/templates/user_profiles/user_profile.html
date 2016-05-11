@@ -2,13 +2,36 @@
 
 {% block wrapper-body %}
     {{ block.super }}
-    <div class="jumbotron bg">
-       <div class="container">
+    <div class="row">
+        <div class="jumbotron bg">
+           <div class="container">
+           </div>
        </div>
-   </div>
+       <div class="tab-menu">
+           <ul>
+               <li class="active"><a href="#">Timeline</a></li>
+               <li><a href="#">Photos</a></li>
+               <li><a href="#">Friends</a></li>
+               <li><a href="#">Likes</a></li>
+           </ul>
+       </div>
+    </div>
 {% endblock %}
 
 {% block content %}
+
+    {% if has_permission %}
+    <div class="status">
+        <div class="card card-panel">
+            <span>Status</span>
+            <form action="#" method="POST" id="form-status">
+                <textarea autocomplete="off" class="form-input-2 form-input" cols="40" id="inputMessage" maxlength="512" name="message" placeholder="What's on your mind" rows="2"></textarea>
+                <button class="btn btn-primary btn-sm btn-right" type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+
     <div class="welcome">
         <div class="row">
             <div class="col-md-8">
@@ -16,6 +39,8 @@
             </div>
         </div>
     </div>
+
+
 
     <div class="account-info">
         <div class="row">
