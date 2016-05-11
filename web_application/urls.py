@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
 ]
 
+handler403 = 'web_application.views.handler403'
 handler404 = 'web_application.views.handler404'
 handler500 = 'web_application.views.handler505'

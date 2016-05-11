@@ -6,6 +6,16 @@ def index(request):
         return redirect('user_profile:index', request.user.username)
     return redirect('authentication:login')
 
+def handler403(request):
+    msg = "Forbidden."
+
+    context = {
+        'error_code': 403,
+        'message': msg,
+    }
+
+    return render(request, 'web_application/errorhandler.html', context)
+
 def handler404(request):
     msg = "We couldn't find the page you were looking for."
 
