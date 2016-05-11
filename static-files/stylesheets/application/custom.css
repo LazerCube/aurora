@@ -1,10 +1,7 @@
-body{
-    background-color: #f0f0f0;
-}
-
-#content-wrapper{
-	padding-top:65px;
-}
+/*
+ *	Page - content
+ *	Friends list margin
+ */
 
 .page-content{
 	margin-right: 0px;
@@ -20,15 +17,9 @@ body{
 	}
 }
 
-
 /*
  *  Scroll bar
  */
-
-.messages::-webkit-scrollbar-track
-{
-
-}
 
 .messages::-webkit-scrollbar
 {
@@ -41,33 +32,16 @@ body{
 	background-color: #DADBDF;
 }
 
-
-.center-text{
-    text-align: center;
-}
-
-.row-centered {
-    text-align:center;
-}
-
-.col-centered {
-    display:inline-block;
-    float:none;
-    /* reset the text-align */
-    text-align:center;
-    /* inline-block space fix */
-    margin-right:-4px;
-}
-
-
-.card .card-action{
-    text-align: left;
-}
+/* Custom Card */
 
 .card .login .card-image,
 .card .register .card-image{
     height: 75px;
     overflow: hidden;
+}
+
+.card .card-action form.display-inline{
+    display: inline-block;
 }
 
 /* bg */
@@ -76,34 +50,6 @@ body{
   background: url('https://unsplash.it/1855/400/?random')center center;
   background-color: #dadbdf;
 }
-
-/* Cards */
-
-.card .card-action a,
-.card .card-action .link {
-  margin-right: 20px;
-  text-transform: uppercase;
-  text-decoration: none;
-}
-
-.card .card-action form.display-inline{
-    display: inline-block;
-}
-
-.btn-full{
-    margin-left: 0px!important;
-    margin-right: 0px!important;
-}
-
-.btn-right{
-    float:right
-}
-
-.card .card-action .btn{
-    margin-right: 10px;
-}
-
-
 
 /* Nav */
 
@@ -148,15 +94,6 @@ textarea.chat-input{
     padding: 15px!important;
 }
 
-.btn{
-	overflow: hidden;
-}
-
-a.btn {
-    color: #ffffff;
-    text-decoration:none;
-}
-
 .form-input:placeholder-shown{
     text-transform: capitalize;
     letter-spacing: inherit;
@@ -187,34 +124,6 @@ textarea.form-input-2.focus {
 
 /* navbar */
 
-#push_sidebar {
-	transition: all .5s ease;
-}
-
-#wrapper {
-    transition: none;
-}
-
-.navbar-fixed-bottom, .navbar-fixed-top {
-    transition: none;
-}
-
-@media (min-width: 1192px){
-    #push_sidebar {
-        transition: none;
-    }
-    body.show_sidebar #wrapper{
-        margin-left: 200px;
-    }
-}
-
-body.show_sidebar .navbar-fixed-bottom, body.show_sidebar .navbar-fixed-top {
-    margin: inherit;
-    z-index: 998;
-	transition: none;
-}
-
-
 .navbar .navbar-header .navbar-brand{
     padding: 15px 0.9375rem ;
 }
@@ -230,7 +139,6 @@ body.show_sidebar .navbar-fixed-bottom, body.show_sidebar .navbar-fixed-top {
 /* Jumbo */
 
 .jumbotron{
-	display: block;
     padding: 2rem;
     margin: 0px;
 }
@@ -239,7 +147,7 @@ body.show_sidebar .navbar-fixed-bottom, body.show_sidebar .navbar-fixed-top {
     min-height: 140px;
 }
 
-/* Page-banner */
+/* Page-sub-menu */
 
 .navbar .navbar-header{
     line-height: 65px;
@@ -260,13 +168,6 @@ body.show_sidebar .navbar-fixed-bottom, body.show_sidebar .navbar-fixed-top {
     color: #f8f8f8;
 }
 
-input[type=text]::-ms-clear {  display: none; width : 0; height: 0; }
-input[type=text]::-ms-reveal {  display: none; width : 0; height: 0; }
-input[type="search"]::-webkit-search-decoration,
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-results-button,
-input[type="search"]::-webkit-search-results-decoration { display: none; }
-
 .nav{
     display:inline-block;
 }
@@ -279,28 +180,12 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 /* Chat */
 
-.card{
-	background-color: #f8f8f8;
-	box-shadow: none;
-	border-radius: 0.3rem;
-	border: 1px solid #dadbdf;
-    position: relative;
-    overflow: auto;
-    margin: 0.9375rem 0;
-}
-
 .chat .card{
-    background: #f8f8f8;
     text-align: left;
-    box-shadow: none;
 }
 
 .card-line{
     border-top: 1px solid #dadbdf;
-}
-
-.card .card-action{
-	border-top: 1px solid #dadbdf;
 }
 
 .chat .messages{
@@ -387,6 +272,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 }
 
 /* Friends list */
+
 .friends-list{
 	margin-top: 65px;
 	width: 200px;
