@@ -6,6 +6,9 @@ def index(request):
         return redirect('user_profile:index', request.user.username)
     return redirect('authentication:login')
 
+def test(request):
+    return render(request, 'web_application/test.html')
+
 def handler403(request):
     msg = "Forbidden."
 
