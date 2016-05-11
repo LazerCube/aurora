@@ -236,7 +236,7 @@ body.show_sidebar .navbar-fixed-bottom, body.show_sidebar .navbar-fixed-top {
 }
 
 .jumbotron .container{
-    min-height: 101px;
+    min-height: 140px;
 }
 
 /* Page-banner */
@@ -500,6 +500,7 @@ ul.friends li.friend a:hover{
 
 .tab-menu ul li.active{
     color: #46494C;
+    margin-bottom: -1px;
 }
 
 .tab-menu ul li a{
