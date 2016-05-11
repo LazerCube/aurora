@@ -243,7 +243,33 @@ body.show_sidebar .navbar-fixed-bottom, body.show_sidebar .navbar-fixed-top {
 /* Page-banner */
 
 .navbar .navbar-header{
-    line-height: 2rem;
+    line-height: 65px;
+}
+
+.search-container {
+    margin-top: 0px;
+    margin-top: -5px;
+}
+
+.search-container .icon {
+    color: #f8f8f8;
+    margin-top: -15px;
+}
+
+.search-container input#search {
+    width: 450px;
+    color: #f8f8f8;
+}
+
+input[type=text]::-ms-clear {  display: none; width : 0; height: 0; }
+input[type=text]::-ms-reveal {  display: none; width : 0; height: 0; }
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { display: none; }
+
+.nav{
+    display:inline-block;
 }
 
 /* Chat */
