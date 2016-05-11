@@ -1,27 +1,26 @@
 <!-- header -->
 <div class="navbar navbar-fixed-top" style="margin-bottom:0px">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <div class="nav_trigger"><i class="fa fa-navicon"></i></div>
-            <div class="nav">
-                <div class="search-container">
-                     <span class="icon"><i class="fa fa-search fa-fw"></i></span>
-                     <input type="search" id="search" placeholder="Search"></input>
-                 </div>
+        <div class="">
+            <div class="navbar-header">
+                <div class="nav_trigger"><i class="fa fa-navicon"></i></div>
+                <div class="nav">
+                    <div class="search-container">
+                         <span class="icon"><i class="fa fa-search fa-fw"></i></span>
+                         <input type="search" id="search" placeholder="Search"></input>
+                     </div>
+                </div>
             </div>
-        </div>
-        <div class="navbar-right">
-            <ul class="navbar-nav">
-                <li>
-                    <a href="{% url 'friends:view_requests' %}"><i class="fa fa-bell fa-fw" aria-hidden="true"></i></a>
-                </li>
-                <li>
-                    <a href="{% url 'friends:view_friends' %}"><i class="fa fa-users fa-fw" aria-hidden="true"></i></a>
-                </li>
-                <!-- <li>
-                    <a href="#"><i class="fa fa-cog fa-fw" aria-hidden="true"></i></a>
-                </li> -->
-            </ul>
+            <div class="navbar-right">
+                <ul class="navbar-nav">
+                    <li>
+                        <a href="{% url 'friends:view_requests' %}"><i class="fa fa-bell fa-fw" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="{% url 'friends:view_friends' %}"><i class="fa fa-users fa-fw" aria-hidden="true"></i></a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

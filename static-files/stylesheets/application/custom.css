@@ -236,9 +236,8 @@ body.show_sidebar .navbar-fixed-bottom, body.show_sidebar .navbar-fixed-top {
 }
 
 .jumbotron .container{
-    min-height: 100px;
+    min-height: 101px;
 }
-
 
 /* Page-banner */
 
@@ -247,8 +246,8 @@ body.show_sidebar .navbar-fixed-bottom, body.show_sidebar .navbar-fixed-top {
 }
 
 .search-container {
-    margin-top: 0px;
     margin-top: -5px;
+    padding: 0 15px;
 }
 
 .search-container .icon {
@@ -257,7 +256,7 @@ body.show_sidebar .navbar-fixed-bottom, body.show_sidebar .navbar-fixed-top {
 }
 
 .search-container input#search {
-    width: 450px;
+    width: 250px;
     color: #f8f8f8;
 }
 
@@ -270,6 +269,12 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 .nav{
     display:inline-block;
+}
+
+@media (min-width: 786px) {
+    .search-container input#search {
+        width: 450px;
+    }
 }
 
 /* Chat */
@@ -320,11 +325,11 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     font-size: .85rem;
 }
 
-.chat .messages li .head {
+.chat .messages li.self .head {
     text-align: right;
 }
 
-.chat .messages li.self .head {
+.chat .messages li .head {
     text-align: left;
 }
 
@@ -336,24 +341,26 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     color: #b7bccf;
 }
 
-.chat .messages li .message{
-    background-color: #45c8dc;
+.chat .messages li.self .message{
+    background-color: #62bf6e;
     float: right;
 }
 
-.chat .messages li .message:before {
+.chat .messages li.self .message:before {
     right: 16px;
-    border-bottom-color: #45c8dc!important;
+    left: auto;
+    border-bottom-color: #62bf6e!important;
 }
 
-.chat .messages li.self .message{
-    background-color: #62bf6e;
+.chat .messages li .message{
+    background-color: #45c8dc;
     float: left;
 }
 
-.chat .messages li.self .message:before {
+
+.chat .messages li .message:before {
     left: 16px;
-    border-bottom-color: #62bf6e!important;
+    border-bottom-color: #45c8dc!important;
 }
 
 .chat .messages li .message {
@@ -374,7 +381,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     width: 0px;
     height: 0px;
     top: -12px;
-    border-bottom: 12px solid #62bf6e;
+    border-bottom: 12px solid #45c8dc;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
 }
@@ -510,6 +517,10 @@ ul.friends li.friend a:hover{
 .tab-menu ul li.active{
     color: #46494C;
     border-bottom: solid 2px #45c8dc;
+}
+
+.tab-menu ul li a:hover {
+    color: #46494C;
 }
 
 
