@@ -14,6 +14,6 @@
 <div class="card-action">
     <form method="post" action="{% url 'friends:cancel_friend' friend.pk %}">
         {% csrf_token %}
-        <input type="submit" class="btn btn-danger btn-sm btn-full link" value="Cancel Friend Request" />
+        <input type="submit" class="btn btn-danger btn-full link" value="Cancel Friend Request" />
     </form>
 </div>
