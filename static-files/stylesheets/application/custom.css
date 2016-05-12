@@ -40,7 +40,7 @@
     overflow: hidden;
 }
 
-.card .card-action form.display-inline{
+form.display-inline{
     display: inline-block;
 }
 
@@ -102,10 +102,8 @@ textarea.chat-input{
 
 textarea:focus,
 textarea.focus,
-input[type="text"]:focus,
-input[type="text"].focus,
-input[type="password"]:focus,
-input[type="password"].focus {
+input:focus,
+input.focus {
 	border-bottom: solid 1px #45c8dc!important;
 	outline: none;
 }
@@ -385,4 +383,16 @@ ul.friends li.friend a:hover{
 
 .status .card{
     padding: 10px;
+}
+
+
+/* Search */
+
+.search-container{
+	padding-left: 0px;
+	width: 400px;
+}
+
+.search-container input#search {
+	width: 100%;
 }

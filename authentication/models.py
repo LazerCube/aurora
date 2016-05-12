@@ -5,6 +5,7 @@ from django.contrib.auth.models import BaseUserManager
 from django.db import models
 
 from django.utils.encoding import python_2_unicode_compatible
+from django.db.models import Q
 
 class AccountManager(BaseUserManager):
     def create_user(self, email,password=None, **kwargs):
@@ -37,6 +38,14 @@ class AccountManager(BaseUserManager):
         account.save()
 
         return account
+
+    def find_users_by_name(self, query):
+        qs = Account.objects.all()
+        for term in query.split():
+            qs = qs.filter(Q(first_name__icontains = term) |
+                           Q(second_name__icontains = term)|
+                           Q(username__icontains = term))
+        return qs
 
 class Account(AbstractBaseUser,PermissionsMixin):
     email = models.EmailField(unique=True) #Needs to be unique for login

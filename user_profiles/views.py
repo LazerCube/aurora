@@ -1,9 +1,12 @@
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
 from authentication.permissions import is_owner
+from django.db.models import Q
 
 from friends.models import Friend
 from authentication.models import Account
+
+from forms import SearchForm
 
 @login_required
 def profile(request, username):
@@ -27,3 +30,20 @@ def profile(request, username):
     }
 
     return render(request, 'user_profiles/user_profile.html', context)
+
+@login_required
+def search(request):
+    form = SearchForm()
+    results = None
+    if request.method == 'GET':
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            search_qry = form.cleaned_data['search_qry']
+            results = Account.objects.find_users_by_name(search_qry)
+
+    content = {
+            'form' : form,
+            'results' : results,
+    }
+
+    return render(request, 'user_profiles/search.html', content)
