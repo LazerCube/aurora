@@ -122,20 +122,6 @@ textarea.form-input-2.focus {
     margin: 10px 0;
 }
 
-/* navbar */
-
-.navbar .navbar-header .navbar-brand{
-    padding: 15px 0.9375rem ;
-}
-
-.navbar-nav li:last-child {
-    padding-right: 0.9375rem;
-}
-
-.nav_trigger{
-    margin-left: 0.9375rem;
-}
-
 /* Jumbo */
 
 .jumbotron{
@@ -145,37 +131,6 @@ textarea.form-input-2.focus {
 
 .jumbotron .container{
     min-height: 140px;
-}
-
-/* Page-sub-menu */
-
-.navbar .navbar-header{
-    line-height: 65px;
-}
-
-.search-container {
-    margin-top: -5px;
-    padding: 0 15px;
-}
-
-.search-container .icon {
-    color: #f8f8f8;
-    margin-top: -15px;
-}
-
-.search-container input#search {
-    width: 250px;
-    color: #f8f8f8;
-}
-
-.nav{
-    display:inline-block;
-}
-
-@media (min-width: 786px) {
-    .search-container input#search {
-        width: 450px;
-    }
 }
 
 /* Chat */
