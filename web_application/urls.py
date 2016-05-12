@@ -9,7 +9,6 @@ urlpatterns = [
     url(r'^friends/', include('friends.urls')),
     url(r'^messages/', include('chat.urls')),
     url(r'^$', views.index, name='index'),
-    url(r'^test/$', views.test, name='test'),
 ]
 
 handler403 = 'web_application.views.handler403'
