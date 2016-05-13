@@ -61,22 +61,25 @@ def send(request):
     '''recives messages sent and links to corresponding room model'''
     if request.method == 'POST':
         response_data = {}
-        room_id = request.POST.get('room_id')
-        message = request.POST.get('message')
+        room_id = request.POST.get('room_id','')
+        message = request.POST.get('message','')
 
-        r = get_object_or_404(Room, pk=room_id)
+        if not room_id == '' and not message == '':
+            r = get_object_or_404(Room, pk=room_id)
+            r.say(request.user, message)
+            response_data['response'] = 'Create message successful!'
 
-        r.say(request.user, message)
-        print("MESSAGE SENT")
-
-        response_data['response'] = 'Create message successful!'
-
-        return HttpResponse(
-            json.dumps(response_data), content_type="application/json")
+            return HttpResponse(
+                json.dumps(response_data), content_type="application/json")
+        else:
+            return HttpResponse(
+                json.dumps({ 'errmsg' : "Something went wrong."}),
+                content_type="application/json"
+            )
 
     else:
         return HttpResponse(
-            json.dumps({ Error : "Something went wrong."}),
+            json.dumps({ 'errmsg' : "Something went wrong."}),
             content_type="application/json"
         )
 
@@ -101,7 +104,7 @@ def sync(request):
 
     else:
         return HttpResponse(
-            json.dumps({ Error : "Something went wrong."}),
+            json.dumps({ 'errmsg' : "Something went wrong."}),
             content_type="application/json"
         )
 
@@ -125,7 +128,7 @@ def receive(request):
 
     else:
         return HttpResponse(
-            json.dumps({ Error : "Something went wrong."}),
+            json.dumps({ 'errmsg' : "Something went wrong."}),
             content_type="application/json"
         )
 

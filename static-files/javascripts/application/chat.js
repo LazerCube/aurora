@@ -30,9 +30,8 @@ $(function() {
              // Successful response
              success : function(json) {
                  $('#inputMessage').val(''); // removes the value from the input
-                 sync();
-                 console.log(json); // log returned json to console
-                 console.log("success"); // another sanity check
+                 //console.log(json); // log returned json to console
+                 //console.log("success"); // another sanity check
              },
 
              // Non-successful response
