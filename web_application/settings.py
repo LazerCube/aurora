@@ -46,6 +46,8 @@ AUTHENTICATION_BACKENDS = (
     'guardian.backends.ObjectPermissionBackend',
 )
 
+GUARDIAN_GET_INIT_ANONYMOUS_USER = 'authentication.models.get_anonymous_user_instance'
+
 ROOT_URLCONF = 'web_application.urls'
 
 # Static files (CSS, JavaScript, Images)

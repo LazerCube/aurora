@@ -51,7 +51,7 @@ class AccountManager(BaseUserManager):
             print(i)
         return qs
 
-class Account(AbstractBaseUser,PermissionsMixin):
+class Account(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True) #Needs to be unique for login
     username = models.CharField(max_length=32, unique=True) #Needs to be unique for URL
 
@@ -77,3 +77,9 @@ class Account(AbstractBaseUser,PermissionsMixin):
 
     def get_short_name(self):
         return self.first_name
+
+
+def get_anonymous_user_instance(User):
+    return User(username='Anonymous',
+                first_name='Anonymous',
+                second_name='User')
