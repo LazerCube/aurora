@@ -40,6 +40,11 @@
     overflow: hidden;
 }
 
+.card-block{
+	padding: 20px;
+	border-top: 1px solid #dadbdf;
+}
+
 form.display-inline{
     display: inline-block;
 }
@@ -405,4 +410,36 @@ button, input, select, textarea {
 
 .search-container .icon i {
     margin-left: 5px;
+}
+
+.navbar-toggler {
+    display: inline-block;
+}
+
+.search-bar{
+	margin-top: 10px;
+}
+
+.search-bar .search-container{
+	width: 100%;
+}
+
+.search-bar .search-container input#search{
+	background-color: #f8f8f8;
+	border-radius: 0.2rem;
+    border: solid 1px #dadbdf;
+	color: #838999;
+}
+
+.search-bar .search-container input#search:focus,
+.search-bar .search-container input#search.focus {
+    border: solid 1px #45c8dc!important;
+}
+
+.search-bar .search-container .icon i{
+	color: #dadbdf;
+}
+
+.search-bar .search-container input#search::-webkit-input-placeholder {
+	color: #dadbdf;
 }
