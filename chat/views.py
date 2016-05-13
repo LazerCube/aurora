@@ -78,10 +78,7 @@ def send(request):
             )
 
     else:
-        return HttpResponse(
-            json.dumps({ 'errmsg' : "Something went wrong."}),
-            content_type="application/json"
-        )
+        return redirect('chat:view_chatrooms')
 
 @login_required
 def sync(request):
@@ -103,10 +100,7 @@ def sync(request):
         return HttpResponse(response_data)
 
     else:
-        return HttpResponse(
-            json.dumps({ 'errmsg' : "Something went wrong."}),
-            content_type="application/json"
-        )
+        return redirect('chat:view_chatrooms')
 
 @login_required
 def receive(request):
@@ -127,10 +121,7 @@ def receive(request):
         return HttpResponse(response_data)
 
     else:
-        return HttpResponse(
-            json.dumps({ 'errmsg' : "Something went wrong."}),
-            content_type="application/json"
-        )
+        return redirect('chat:view_chatrooms')
 
 # @login_required
 # def join(request):
