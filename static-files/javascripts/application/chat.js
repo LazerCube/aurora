@@ -5,7 +5,7 @@ $(function() {
     // Form submit for sending messages
     $('#form-message').on('submit', function(event){
         event.preventDefault();
-        console.log("Form submitted!")
+        //console.log("Form submitted!")
         send();
     });
 
@@ -17,14 +17,9 @@ $(function() {
         }
     });
 
-    setInterval(function() {
-        console.log("CHECK UPDATE")
-        sync();
-    }, 3000);
-
     // AJAX
     function send() {
-        console.log("LAUNCHED: form-message")
+        //console.log("LAUNCHED: form-message")
         $.ajax({
              url : "/messages/conversation/send",
              type : "POST",
@@ -50,7 +45,7 @@ $(function() {
     };
 
     function receive() {
-        console.log("LAUNCHED: receive")
+        //console.log("LAUNCHED: receive")
         $.ajax({
              url : "/messages/conversation/receive",
              type : "POST",
@@ -62,7 +57,7 @@ $(function() {
                  //console.log(data); // log returned json to console
                  out.scrollTop = out.scrollHeight - out.clientHeight;
                  update_scroll();
-                 console.log("SUCCESS: receive"); // another sanity check
+                 //console.log("SUCCESS: receive"); // another sanity check
              },
 
              // Non-successful response
@@ -77,13 +72,13 @@ $(function() {
     function sync() {
         //console.log("LAUNCHED: sync")
         var num_messages = minMaxId('.message');
-        var latest_message_pk = num_messages['max']
+        var latest_message = num_messages['max']
 
         $.ajax({
              url : "/messages/conversation/sync",
              type : "POST",
              data : {   room_id : $('#returntoken').val(),
-                        last_id: (latest_message_pk),
+                        last_id: (latest_message),
                     },
 
              // Successful response
@@ -91,6 +86,7 @@ $(function() {
                  check_scroll();
                  $('.messages').append(data);
                  update_scroll();
+                 setTimeout(sync, 3000) // Scheldules the next request when the currnet one's completes
                  //console.log(data); // log returned json to console
                  //console.log("SUCCESS: receive"); // another sanity check
              },
@@ -129,4 +125,8 @@ $(function() {
 
     // launch msg
     console.log("LOADED: chat.js")
+
+    //Start first sync
+    setTimeout(sync, 5000)
+
 });
