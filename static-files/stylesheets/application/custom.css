@@ -443,3 +443,11 @@ button, input, select, textarea {
 .search-bar .search-container input#search::-webkit-input-placeholder {
 	color: #dadbdf;
 }
+
+/* navbar */
+
+.navbar-center{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
