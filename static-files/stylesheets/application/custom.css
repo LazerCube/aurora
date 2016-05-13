@@ -396,3 +396,13 @@ ul.friends li.friend a:hover{
 .search-container input#search {
 	width: 100%;
 }
+
+button, input, select, textarea {
+	display: block;
+	background-color: inherit;
+	border: none;
+}
+
+.search-container .icon i {
+    margin-left: 5px;
+}

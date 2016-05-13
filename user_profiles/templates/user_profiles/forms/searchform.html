@@ -1,7 +1,4 @@
-<form method="get" action="{% url 'user_profile:search' %}" class="display-inline" accept-charset="utf-8">
-
-    <div class="search-container" style="float:left;">
-        {{ form.search_qry }}
-        <button type='submit'><i class="fa fa-search fa-fw"></i></button>
-    </div>
+<form method="get" action="{% url 'user_profile:search' %}" accept-charset="utf-8">
+    <button type='submit' class="icon"><i class="fa fa-search fa-fw"></i></button>
+    <input autocomplete="off" id="search" maxlength="128" name="search_qry" placeholder="Search" type="text">
 </form>

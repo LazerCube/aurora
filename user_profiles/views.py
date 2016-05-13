@@ -6,8 +6,6 @@ from django.db.models import Q
 from friends.models import Friend
 from authentication.models import Account
 
-from forms import SearchForm
-
 @login_required
 def profile(request, username):
     profile = get_object_or_404(Account, username=username)
@@ -33,16 +31,15 @@ def profile(request, username):
 
 @login_required
 def search(request):
-    form = SearchForm()
     results = None
     if request.method == 'GET':
-        form = SearchForm(request.GET)
-        if form.is_valid():
-            search_qry = form.cleaned_data['search_qry']
+        search_qry = request.GET.get('search_qry','')
+        if not search_qry == '':
             results = Account.objects.find_users_by_name(search_qry)
+        else:
+            pass
 
     content = {
-            'form' : form,
             'results' : results,
     }
 
