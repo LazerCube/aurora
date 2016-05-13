@@ -45,10 +45,6 @@ class AccountManager(BaseUserManager):
             qs = qs.filter(Q(first_name__icontains = term) |
                            Q(second_name__icontains = term)|
                            Q(username__icontains = term))
-        print("---------------------------------")
-        print("ACCOUNTS:")
-        for i in qs:
-            print(i)
         return qs
 
 class Account(AbstractBaseUser, PermissionsMixin):
