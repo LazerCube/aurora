@@ -7,7 +7,7 @@
                     <a href="/" class="sidebar-brand">{{ request.user.username }}</a>
                 </li>
                 <li><a href='{% url 'user_profile:index' request.user.username %}' class="active"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
-                <li><a href='#'><i class="fa fa-newspaper-o" aria-hidden="true"></i>News Feed</a></li>
+                <li><a href='{% url 'news_feed:index' %}'><i class="fa fa-newspaper-o" aria-hidden="true"></i>News Feed</a></li>
                 <li><a href='{% url 'chat:view_chatrooms' %}'><i class="fa fa-envelope" aria-hidden="true"></i>Messages</a></li>
                 <li><a href='{% url 'authentication:logout' %}'><i class="fa fa-sign-out" aria-hidden="true"></i>Sign Out</a></li>
             </ul>

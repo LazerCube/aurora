@@ -55,7 +55,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     second_name = models.CharField(max_length=32, blank=True)
     tagline = models.CharField(max_length=128,blank=True)
 
-    is_admin = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False) # Are they an admin?
 
     created_at = models.DateTimeField(auto_now_add=True) #When object was created
     updated_at = models.DateTimeField(auto_now=True) #When object was last updated
@@ -63,7 +63,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     objects = AccountManager()
 
     USERNAME_FIELD = 'email' #Djangos built in user requires a username. This is used to log in the user.
-    REQUIRED_FIELDS = ['username'] #will need to use username in URL so we must have it.
+    REQUIRED_FIELDS = ['username'] #uses username in URL so we must have it.
 
     def __str__(self):
         return self.username

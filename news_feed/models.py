@@ -5,12 +5,21 @@ from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 
+from django.db.models import Q
+
 # Create your models here.
 
 class ActivityManager(models.Manager):
+
     def public(self, *args, **kwargs):
         '''Returns public actions'''
+        kwargs['public'] = True
+        return self.filter(*args, **kwargs)
+
+    def user(self, obj, **kwargs):
         pass
+
+
 
 VERB_TYPE_CHOICES = (
     ('add'),
@@ -62,6 +71,8 @@ class Activity(models.Model):
 
     public = models.BooleanField(default=True, db_index=True) # can other people see it?
     timestamp = models.DateTimeField(auto_now=True, editable=False) # Time they did it at
+
+    objects = ActivityManager()
 
     def __str__(self):
         ctx = {

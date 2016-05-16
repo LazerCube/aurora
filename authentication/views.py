@@ -76,6 +76,6 @@ def login(request):
         return redirect('user_profile:index', request.user.username)
 
 def logout(request):
-    print("LOG OUT")
     auth_logout(request)
+    action.send(user, verb='logged out')
     return redirect('authentication:login')
