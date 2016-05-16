@@ -7,7 +7,6 @@ from django.contrib.contenttypes.models import ContentType, ContentTypeManager
 from django.contrib.contenttypes.fields import GenericForeignKey
 
 
-
 class RoomManager(models.Manager):
     def create(self, object, name, desc):
         '''Creates a new chat room and registers it to the calling object'''

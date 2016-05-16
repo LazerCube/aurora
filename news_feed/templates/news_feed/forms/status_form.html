@@ -1,5 +1,12 @@
-<form action="#" method="POST" id="form-status">
+{% load staticfiles %}
+
+{% block form_content %}
+<!-- display the form -->
+<form action="{% url 'news_feed:home' %}" method="POST" id="form-status">
     {% csrf_token %}
-    <textarea autocomplete="off" class="form-input-2 form-input" cols="40" id="inputMessage" maxlength="512" name="message" placeholder="What's on your mind?" rows="2"></textarea>
+    {{ form.message }}
+    <!-- <textarea autocomplete="off" class="form-input-2 form-input" cols="40" id="inputMessage" maxlength="512" name="message" placeholder="What's on your mind?" rows="2"></textarea> -->
     <button class="btn btn-primary btn-sm btn-right" type="submit">Send</button>
 </form>
+<!-- end display the form -->
+{% endblock %}

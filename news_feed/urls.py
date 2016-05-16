@@ -3,5 +3,6 @@ from . import views
 
 app_name = 'news_feed'
 urlpatterns = [
-    url(r'^$', views.feed, name='index'),
+    url(r'^$', views.home, name='index'),
+    url(r'^$', views.feed, name='feed'),
 ]
