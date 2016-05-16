@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
 
 from authentication.models import Account
-from models import Activity
+from activity.models import Activity
 
 @login_required
 def feed(request):

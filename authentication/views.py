@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout as aut
 from models import Account
 from forms import LoginForm, RegisterForm
 
-from news_feed.signals import action
+from activity.signals import action
 
 
 def register(request):

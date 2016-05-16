@@ -14,7 +14,7 @@ from django.contrib.auth.models import Group
 from guardian.shortcuts import assign_perm
 from guardian.shortcuts import remove_perm
 
-from news_feed.signals import action
+from activity.signals import action
 
 class FriendManager(models.Manager):
 

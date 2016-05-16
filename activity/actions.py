@@ -1,7 +1,7 @@
 from django.contrib.contenttypes.models import ContentType
 from django.utils.six import text_type
 from django.dispatch import receiver
-from news_feed.signals import action
+from activity.signals import action
 
 from models import Activity
 
