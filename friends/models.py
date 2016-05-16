@@ -14,6 +14,8 @@ from django.contrib.auth.models import Group
 from guardian.shortcuts import assign_perm
 from guardian.shortcuts import remove_perm
 
+from news_feed.signals import action
+
 class FriendManager(models.Manager):
 
     def get_group_name(self, to_user, from_user):
@@ -149,6 +151,9 @@ class FriendRequest(models.Model):
 
         self.to_user.groups.add(g)
         self.from_user.groups.add(g)
+
+        action.send(self.to_user, verb='friended', target=self.from_user)
+        action.send(self.from_user, verb='friended', target=self.to_user)
 
         return True
 

@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+from django.utils.timesince import timesince as djtimesince
 from django.db import models
 
 from django.contrib.contenttypes.models import ContentType
@@ -72,8 +73,11 @@ class Activity(models.Model):
         }
         if self.target:
             if self.action_object:
-                return _('%(actor)s %(verb)s %(action_object)s on %(target)s %(timesince)s ago') % ctx
-            return _('%(actor)s %(verb)s %(target)s %(timesince)s ago') % ctx
+                return ('%(actor)s %(verb)s %(action_object)s on %(target)s %(timesince)s ago') % ctx
+            return ('%(actor)s %(verb)s %(target)s %(timesince)s ago') % ctx
         if self.action_object:
-            return _('%(actor)s %(verb)s %(action_object)s %(timesince)s ago') % ctx
-        return _('%(actor)s %(verb)s %(timesince)s ago') % ctx
+            return ('%(actor)s %(verb)s %(action_object)s %(timesince)s ago') % ctx
+        return ('%(actor)s %(verb)s %(timesince)s ago') % ctx
+
+    def timesince(self, now=None):
+        return djtimesince(self.timestamp, now).encode('utf8').replace(b'\xc2\xa0', b' ').decode('utf8')

@@ -4,7 +4,21 @@
     <div class="feed">
         <div class="row">
             <div class="col-md-6">
-                <h2>Feed</h2>
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Feed</span>
+                    </div>
+                    <div class="card-block">
+                        <ul>
+                            {% for f in feed %}
+                                <li>{{ f }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="card-action">
+                        <a class="btn btn-full"href="#">Load More</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

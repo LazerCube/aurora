@@ -24,10 +24,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'guardian',
+    'news_feed',
     'authentication',
     'user_profiles',
     'friends',
-    'news_feed',
     'chat',
 ]
 

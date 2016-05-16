@@ -1,9 +1,10 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
-from django.template import RequestContext #?????
 
 from models import Account
 from forms import LoginForm, RegisterForm
+
+from news_feed.signals import action
 
 
 def register(request):
@@ -55,7 +56,7 @@ def login(request):
                 if user is not None:
                     if user.is_active:
                         auth_login(request, user)
-                        print("Logged in")
+                        action.send(user, verb='logged in')
                         return redirect('user_profile:index', request.user.username)
                     else:
                         state = "Your account is not active, please contact the administrator."

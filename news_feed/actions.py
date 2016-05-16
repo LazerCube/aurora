@@ -1,7 +1,11 @@
 from django.contrib.contenttypes.models import ContentType
-from models import Activity
+from django.utils.six import text_type
+from django.dispatch import receiver
 from news_feed.signals import action
 
+from models import Activity
+
+@receiver(action)
 def action_handler(verb, **kwargs):
     kwargs.pop('signal', None)
     actor = kwargs.pop('sender')
@@ -9,13 +13,12 @@ def action_handler(verb, **kwargs):
     if hasattr(verb, '_proxy____args'):
         verb = verb._proxy____args[0]
 
-    newaction = Activity.create(
+    newaction = Activity.objects.create(
         actor_content_type=ContentType.objects.get_for_model(actor),
         actor_object_id=actor.pk,
         verb=text_type(verb),
         public=bool(kwargs.pop('public', True)),
         description=kwargs.pop('description', None),
-        timestamp=kwargs.pop('timestamp', now())
     )
 
     for opt in ('target', 'action_object'):
@@ -27,5 +30,3 @@ def action_handler(verb, **kwargs):
 
     newaction.save()
     return newaction
-
-action.connect(action_handler)
