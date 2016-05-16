@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.contrib.auth.decorators import login_required
 
 from models import Account
 from forms import LoginForm, RegisterForm
@@ -74,7 +75,8 @@ def login(request):
     else:
         return redirect('user_profile:index', request.user.username)
 
+@login_required
 def logout(request):
+    action.send(request.user, verb='logged out')
     auth_logout(request)
-    action.send(user, verb='logged out')
     return redirect('authentication:login')

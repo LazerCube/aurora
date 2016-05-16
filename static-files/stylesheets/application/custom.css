@@ -21,15 +21,22 @@
  *  Scroll bar
  */
 
-.messages::-webkit-scrollbar
-{
+.messages::-webkit-scrollbar {
 	width: 8px;
 }
 
-.messages::-webkit-scrollbar-thumb
-{
+.messages::-webkit-scrollbar-thumb {
 	border-radius: 6px;
 	background-color: #DADBDF;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+	border-radius: 6px;
+	background-color: #DADBDF;
+}
+
+.custom-scroll::-webkit-scrollbar {
+	width: 8px;
 }
 
 /* Custom Card */
@@ -450,4 +457,11 @@ button, input, select, textarea {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+/* feed */
+
+.feed-block{
+	max-height: 150px;
+	overflow: auto;
 }

@@ -15,7 +15,7 @@ def profile(request, username):
     form = StatusPostForm()
 
     profile = get_object_or_404(Account, username=username)
-    feed = Activity.objects.user(profile, with_user_activity=True)
+    feed = Activity.objects.user(profile, with_user_activity=True).order_by('-timestamp')
 
     are_friends = False
     has_permission = False
