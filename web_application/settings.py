@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'authentication',
     'user_profiles',
     'friends',
+    'news_feed',
     'chat',
 ]
 

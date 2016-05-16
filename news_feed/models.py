@@ -6,7 +6,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 
 # Create your models here.
 
-class ActivityManager(models.Manager)
+class ActivityManager(models.Manager):
     def public(self, *args, **kwargs):
         '''Returns public actions'''
         pass
@@ -63,17 +63,17 @@ class Activity(models.Model):
     timestamp = models.DateTimeField(auto_now=True, editable=False) # Time they did it at
 
     def __str__(self):
-    ctx = {
-        'actor': self.actor,
-        'verb': self.verb,
-        'action_object': self.action_object,
-        'target': self.target,
-        'timesince': self.timesince()
-    }
-    if self.target:
+        ctx = {
+            'actor': self.actor,
+            'verb': self.verb,
+            'action_object': self.action_object,
+            'target': self.target,
+            'timesince': self.timesince()
+        }
+        if self.target:
+            if self.action_object:
+                return _('%(actor)s %(verb)s %(action_object)s on %(target)s %(timesince)s ago') % ctx
+            return _('%(actor)s %(verb)s %(target)s %(timesince)s ago') % ctx
         if self.action_object:
-            return _('%(actor)s %(verb)s %(action_object)s on %(target)s %(timesince)s ago') % ctx
-        return _('%(actor)s %(verb)s %(target)s %(timesince)s ago') % ctx
-    if self.action_object:
-        return _('%(actor)s %(verb)s %(action_object)s %(timesince)s ago') % ctx
-    return _('%(actor)s %(verb)s %(timesince)s ago') % ctx
+            return _('%(actor)s %(verb)s %(action_object)s %(timesince)s ago') % ctx
+        return _('%(actor)s %(verb)s %(timesince)s ago') % ctx
