@@ -24,31 +24,27 @@
         {% include 'news_feed/includes/status.html' %}
     {% endif %}
 
-    <div class="welcome">
-        <div class="row">
-            <div class="col-md-8">
-                <h2>{% if has_permission %}<b>Hello,</b>{% endif %} {{ user.username }}{% if has_permission %}<br><small>You can edit this page!</small>{% endif %}</h2>
-            </div>
-        </div>
-    </div>
-
-
-
     <div class="account-info">
         <div class="row">
             <div class="col-md-6">
-                <p>
-                    <ul>
-                        <li><b>Name: </b> {{ user.get_full_name }}</li>
-                        <li><b>Last updated: </b> {{ user.updated_at }}</li>
-                        <li><b>Created: </b> {{ user.created_at }}</li>
-                        <li><br></li>
-                        <li><b>Email: </b> {{ user.email }}</li>
-                        <li><br></li>
-                        {% include 'friends/includes/friends/add.html' %}
-                    </ul>
-                </p>
+                <div class="">
+                    <h2>{% if has_permission %}<b>Hello,</b>{% endif %} {{ user.username }}{% if has_permission %}<br><small>You can edit this page!</small>{% endif %}</h2>
+                    <p>
+                        <ul>
+                            <li><b>Name: </b> {{ user.get_full_name }}</li>
+                            <li><b>Last updated: </b> {{ user.updated_at }}</li>
+                            <li><b>Created: </b> {{ user.created_at }}</li>
+                            <li><br></li>
+                            <li><b>Email: </b> {{ user.email }}</li>
+                            <li><br></li>
+                            {% include 'friends/includes/friends/add.html' %}
+                        </ul>
+                    </p>
+                </div>
             </div>
+            {% include 'news_feed/includes/feed.html' %}
         </div>
     </div>
+
+
 {% endblock %}

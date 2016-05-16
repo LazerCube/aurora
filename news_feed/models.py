@@ -18,8 +18,8 @@ class PostManager(models.Manager):
     #     p.save()
 
     def create_post(self, *args, **kwargs):
-        if kwargs['type'] == None:
-            kwargs['type'] == 'u'
+        if not 'type' in kwargs:
+            kwargs['type'] = 'u'
         p = self.model(*args, **kwargs)
         p.save()
         return p
@@ -50,7 +50,14 @@ class Posts(models.Model):
         verbose_name_plural = 'posts'
 
     def __unicode__(self):
-        return self.message
+        if self.type == 'u':
+            return 'status update'
+        elif self.type == 'v':
+            return 'video post'
+        elif self.type == 'i':
+            return 'image post'
+        else:
+            return self.message
 
     def save(self, *args, **kwargs):
         super(Posts, self).save(*args, **kwargs)

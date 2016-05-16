@@ -6,9 +6,16 @@ from django.db.models import Q
 from friends.models import Friend
 from authentication.models import Account
 
+from news_feed.forms import StatusPostForm
+from activity.models import Activity
+
 @login_required
 def profile(request, username):
+
+    form = StatusPostForm()
+
     profile = get_object_or_404(Account, username=username)
+    feed = Activity.objects.user(profile, with_user_activity=True)
 
     are_friends = False
     has_permission = False
@@ -25,6 +32,8 @@ def profile(request, username):
         'user': profile,
         'are_friends': are_friends,
         'has_permission' : has_permission,
+        'feed': feed,
+        'form': form,
     }
 
     return render(request, 'user_profiles/user_profile.html', context)

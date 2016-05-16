@@ -6,7 +6,6 @@ from forms import LoginForm, RegisterForm
 
 from activity.signals import action
 
-
 def register(request):
     if not request.user.is_authenticated():
         form = RegisterForm()

@@ -1,0 +1,14 @@
+<div class="row">
+    {% for p in posts %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">{{ p.author.username }}</span>
+                        <p>
+                            {{ p.message }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+    {% endfor %}
+</div>
