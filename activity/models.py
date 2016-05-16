@@ -6,6 +6,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 
 from django.db.models import Q
+from collections import defaultdict
 
 class ActivityManager(models.Manager):
 
@@ -14,8 +15,68 @@ class ActivityManager(models.Manager):
         kwargs['public'] = True
         return self.filter(*args, **kwargs)
 
+    def actor(self, obj, **kwargs):
+        ctype  = ContentType.objects.get_for_model(obj)
+        return self.public(actor_object_id=obj.pk,
+                            actor_content_type=ctype , **kwargs)
+
+    def target(self, obj, **kwargs):
+        ctype  = ContentType.objects.get_for_model(obj)
+        return self.public(target_object_id=obj.pk,
+                            target_content_type=ctype , **kwargs)
+
+    def action_object(self, obj, **kwargs):
+        ctype  = ContentType.objects.get_for_model(obj)
+        return self.public(action_object_object_id=obj.pk,
+                            action_object_content_type=ctype , **kwargs)
+
+    def any(self, obj, **kwargs):
+        ctype = ContentType.objects.get_for_model(obj)
+        return self.public(
+            Q(
+                actor_content_type=ctype,
+                actor_object_id=obj.pk,
+            ) | Q(
+                target_content_type=ctype,
+                target_object_id=obj.pk,
+            ) | Q(
+                action_object_content_type=ctype,
+                action_object_object_id=obj.pk,
+            ), **kwargs)
+
     def user(self, obj, **kwargs):
-        pass
+        q = Q()
+        qs = self.public()
+
+        if not obj:
+            return qs.none()
+
+        actors_by_content_type = defaultdict(lambda: [])
+        others_by_content_type = defaultdict(lambda: [])
+
+        #option to get user activity, non object items.
+        if kwargs.pop('with_user_activity', False):
+            object_content_type = ContentType.objects.get_for_model(obj)
+            actors_by_content_type[object_content_type.id].append(obj.pk)
+
+        if len(actors_by_content_type) + len(others_by_content_type) == 0:
+            return qs.none()
+
+        for content_type_id, object_ids in actors_by_content_type.items():
+            q = q | Q(
+                actor_content_type=content_type_id,
+                actor_object_id__in=object_ids,
+            )
+        for content_type_id, object_ids in others_by_content_type.items():
+            q = q | Q(
+                target_content_type=content_type_id,
+                target_object_id__in=object_ids,
+            ) | Q(
+                action_object_content_type=content_type_id,
+                action_object_object_id__in=object_ids,
+            )
+        print("END")
+        return qs.filter(q, **kwargs)
 
 VERB_TYPE_CHOICES = (
     ('add'),

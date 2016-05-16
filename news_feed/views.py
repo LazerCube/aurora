@@ -7,8 +7,11 @@ from activity.models import Activity
 @login_required
 def feed(request):
 
-    feed = Activity.objects.public()
-    #feed = Activity.objects.user(request.user)
+    #feed = Activity.objects.actor(request.user)
+    #feed = Activity.objects.public()
+    feed = Activity.objects.user(request.user, with_user_activity=True)
+
+    print(feed)
 
     context = {
         'feed': feed,
