@@ -1,13 +1,31 @@
 <div class="row">
     {% for p in posts %}
-            <div class="col-lg-4 col-md-6">
-                <div class="card">
-                    <div class="card-content">
-                        <span class="card-title">{{ p.author.username }}</span>
-                        <p>
-                            {{ p.message }}
-                        </p>
-                    </div>
+            <div class="col-xl-4 col-lg-6 col-md-6">
+                <div class="posts">
+                    <ul>
+                        <li class="post-block post-content post-header">
+                            <div class="post-header-container clear-fix">
+                                <a href="{% url 'user_profile:index' p.author.username %}">
+                                    <img src="http://placehold.it/32/45c8dc/45c8dc" alt="img" height="36" width="36">
+                                    {{ p.author.username}}
+                                </a>
+                                <div class="header-timestamp">{{ p.created_at }}<i class="fa fa-globe"></i></div>
+                            </div>
+                            <!-- <div class="dropdown"> -->
+                                <span><i class="fa fa-angle-down dropdown"></i></span>
+                                <!-- <ul class="dropdown-content">
+                                    <li><a href="#">Edit</a></li>
+                                    <li><a href="#">Delete</a></li>
+                                    <li><a href="#">Settings</a></li>
+                                </ul>
+                            </div> -->
+                        </li>
+                        <li class="post-block post-content">
+                            <p>
+                                {{ p.message }}
+                            </p>
+                        </li>
+                    </ul>
                 </div>
             </div>
     {% endfor %}

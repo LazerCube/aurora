@@ -465,3 +465,152 @@ button, input, select, textarea {
 	max-height: 150px;
 	overflow: auto;
 }
+
+/* posts */
+
+.posts {
+    margin: 0.9375rem 0;
+    overflow: auto;
+    position: relative;
+    margin: 0.9375rem 0;
+    background-color: #f8f8f8;
+    border-radius: 0.2rem;
+    border: 1px solid #dadbdf;
+	overflow: visible;
+}
+
+
+.posts ul li.post-block{
+	border-top: 1px solid #dadbdf;
+}
+
+.posts ul li.post-block:first-child{
+	border: none;
+}
+
+.posts ul li.post-block:last-child{
+	border-top: 1px solid #dadbdf;
+}
+
+.posts .post-title {
+	font-size: 1.6rem;
+}
+
+.posts .post-block p {
+    margin: 0px;
+    color: inherit;
+}
+
+.post-content{
+	padding: 10px 30px!important;
+}
+
+.prf-img {
+	display: block;
+    position: relative;
+}
+
+.post-block::after {
+    display: table;
+    clear: both;
+    content: "";
+}
+
+.post-header a{
+	text-decoration: none;
+	font-weight: bold;
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+	position: relative;
+}
+
+.post-header .post-header-container{
+	padding: 8px 0;
+}
+
+.post-header a img {
+	border-radius: 0.2rem;
+	float:left;
+	width: 42px;
+	margin: 0px;
+	margin-right: 20px;
+}
+
+.post-header a img {
+	display: block;
+}
+
+.post-header a:hover{
+	text-decoration: underline;
+	color: #45c8dc;
+}
+
+.post-header .header-timestamp {
+	color: #838999;
+	font-size: 0.8rem;
+}
+
+.post-header .header-timestamp .fa {
+    font-size: .5rem;
+    margin-left: 5px;
+}
+
+@media (min-width: 544px) {
+	.post-header .header-timestamp .fa{
+		font-size: 0.9rem;
+	}
+
+	.post-header .header-timestamp{
+		font-size: 1rem;
+	}
+}
+
+.post-headerr span i {
+    height: 18px;
+    line-height: 18px;
+}
+
+.post-header span{
+	color: #838999;
+	cursor: pointer;
+	font-size: 1.5rem;
+	line-height: 3;
+	padding: 8px 0;
+	display:block;
+	position: absolute;
+	right: 30px;
+	top: 0;
+}
+
+/* Dropdowns */
+
+.dropdown {
+}
+
+ul.dropdown-content {
+	border-radius: 0.2rem;
+	border: 1px solid #dadbdf;
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: auto;
+	margin-top: 50px;
+    padding: 12px 16px;
+	z-index: 10;
+	right: 20px;
+	top: 0;
+}
+
+ul.dropdown-content li{
+	padding: 5px 0;
+}
+
+ul.dropdown-content li a{
+	color: inherit;
+	font-weight: normal;
+}
+
+.dropdown:hover ul.dropdown-content {
+    display: block!important;
+}
