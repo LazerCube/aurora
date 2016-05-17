@@ -49,6 +49,7 @@ AUTHENTICATION_BACKENDS = (
     'guardian.backends.ObjectPermissionBackend',
 )
 
+
 GUARDIAN_GET_INIT_ANONYMOUS_USER = 'authentication.models.get_anonymous_user_instance'
 
 ROOT_URLCONF = 'web_application.urls'
@@ -77,6 +78,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.request',
             ],
         },
     },

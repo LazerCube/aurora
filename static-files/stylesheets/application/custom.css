@@ -7,6 +7,23 @@
 	margin-right: 0px;
 }
 
+.dont-break-out{
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+
+	-ms-word-break: break-all;
+	/* This is the dangerous one in WebKit, as it breaks things wherever */
+	word-break: break-all;
+	/* Instead use this non-standard one: */
+	word-break: break-word;
+
+	/* Adds a hyphen where the word breaks, if supported (No Blink) */
+	-ms-hyphens: auto;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+}
+
 @media (min-width: 1192px){
 	.page-content{
 		margin-right: 200px;
@@ -121,7 +138,9 @@ input.focus {
 }
 
 textarea.form-input-2:focus,
-textarea.form-input-2.focus {
+textarea.form-input-2.focus,
+input.form-input-2.focus,
+input.form-input-2:focus {
     border: solid 1px #45c8dc!important;
 }
 
@@ -499,6 +518,7 @@ button, input, select, textarea {
 .posts .post-block p {
     margin: 0px;
     color: inherit;
+	font-size: 1.1rem;
 }
 
 .post-content{
@@ -583,6 +603,33 @@ button, input, select, textarea {
 	top: 0;
 }
 
+.post-actions button{
+	border: 0;
+	border-right: 1px solid #dadbdf;
+	font-weight: bold;
+	color: #838999;
+	float: left;
+	height: 60px;
+	line-height: 60px;
+	margin: 0;
+	padding: 0;
+	width: 50%;
+}
+
+.post-actions button span{
+	font-size: 1.3rem;
+	margin-right: 5px;
+}
+
+.post-actions button:active{
+	background-color: #f0f0f0;
+}
+
+.post-actions button:hover{
+	text-decoration: underline;
+}
+
+
 /* Dropdowns */
 
 .dropdown {
@@ -613,4 +660,21 @@ ul.dropdown-content li a{
 
 .dropdown:hover ul.dropdown-content {
     display: block!important;
+}
+
+/* Video wrapper */
+
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+}
+
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }

@@ -1,0 +1,10 @@
+{% if p.type = 'v' %}
+    <li class="post-block">
+        {% load embed_video_tags %}
+        {% video p.video is_secure=True as my_video %}
+        <div class="videoWrapper">
+            {% video my_video '100% x 100%' %}
+        </div>
+        {% endvideo %}
+    </li>
+{% endif %}

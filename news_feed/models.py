@@ -21,12 +21,10 @@ class PostManager(models.Manager):
     def create_post(self, *args, **kwargs):
         if not 'type' in kwargs:
             kwargs['type'] = 'u'
-        p = self.model(*args, **kwargs)
-        p.save()
-        return p
+        return self.model(*args, **kwargs)
 
-    def video_post(self, url, **kwargs):
-        return self.create_post(source=url, type='v')
+    def video_post(self, video, **kwargs):
+        return self.create_post(video=video, type='v', **kwargs)
 
 class Posts(models.Model):
     author = models.ForeignKey(Account, editable=False)

@@ -17,7 +17,12 @@ def home(request):
         form = StatusPostForm(request.POST)
         if form.is_valid():
             message = form.cleaned_data['message']
-            post = Posts.objects.create_post(author=request.user, message=message)
+            video = form.cleaned_data['video_url']
+            if video == '':
+                post = Posts.objects.create_post(author=request.user, message=message)
+            else:
+                post = Posts.objects.video_post(video, author=request.user, message=message)
+            post.save()
             action.send(request.user, verb='posted', target=post)
             return redirect('news_feed:index')
 

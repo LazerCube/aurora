@@ -4,7 +4,9 @@
 <!-- display the form -->
 <form action="{% url 'news_feed:index' %}" method="POST" id="form-status">
     {% csrf_token %}
+    {{ form.errors }}
     {{ form.message }}
+    {{ form.video_url }}
     <!-- <textarea autocomplete="off" class="form-input-2 form-input" cols="40" id="inputMessage" maxlength="512" name="message" placeholder="What's on your mind?" rows="2"></textarea> -->
     <button class="btn btn-primary btn-sm btn-right" type="submit">Send</button>
 </form>
