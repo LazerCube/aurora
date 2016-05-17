@@ -1,6 +1,8 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 
+from django.core.exceptions import SuspiciousOperation
+
 from authentication.models import Account
 from chat.models import Room, Message
 from forms import CreateNewChatRoom, CreateMessage
@@ -45,11 +47,9 @@ def view_chat(request,chatroom_id):
     r = get_object_or_404(Room, pk=chatroom_id)
     checker = ObjectPermissionChecker(request.user)
     if checker.has_perm('view_room', r):
-        f = CreateMessage()
 
         content = {
                 'chatroom': r,
-                'form': f,
         }
 
         return render(request, 'chat/conversation.html', content)
@@ -63,22 +63,28 @@ def send(request):
         response_data = {}
         room_id = request.POST.get('room_id','')
         message = request.POST.get('message','')
+        response = request.POST.get('response','')
 
         if not room_id == '' and not message == '':
             r = get_object_or_404(Room, pk=room_id)
             r.say(request.user, message)
             response_data['response'] = 'Create message successful!'
 
-            return HttpResponse(
-                json.dumps(response_data), content_type="application/json")
+            if response:
+                return HttpResponse(
+                    json.dumps(response_data), content_type="application/json")
+            else:
+                return redirect('news_feed:index')
         else:
-            return HttpResponse(
-                json.dumps({ 'errmsg' : "Something went wrong."}),
-                content_type="application/json"
-            )
-
+            if response:
+                return HttpResponse(
+                    json.dumps({ 'errmsg' : "Something went wrong."}),
+                    content_type="application/json"
+                )
+            else:
+                raise SuspiciousOperation("Invalid request; see documentation for correct paramaters")
     else:
-        return redirect('chat:view_chatrooms')
+        return redirect('news_feed:index')
 
 @login_required
 def sync(request):

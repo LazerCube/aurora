@@ -499,17 +499,14 @@ button, input, select, textarea {
 }
 
 
-.posts ul li.post-block{
+.posts .post-block{
 	border-top: 1px solid #dadbdf;
 }
 
-.posts ul li.post-block:first-child{
+.posts .post-block:first-child{
 	border: none;
 }
 
-.posts ul li.post-block:last-child{
-	border-top: 1px solid #dadbdf;
-}
 
 .posts .post-title {
 	font-size: 1.6rem;
@@ -605,15 +602,19 @@ button, input, select, textarea {
 
 .post-actions button{
 	border: 0;
-	border-right: 1px solid #dadbdf;
 	font-weight: bold;
 	color: #838999;
+	border-right: 1px solid #dadbdf;
 	float: left;
 	height: 60px;
 	line-height: 60px;
 	margin: 0;
 	padding: 0;
 	width: 50%;
+}
+
+.post-actions button:last-child{
+	border: none;
 }
 
 .post-actions button span{
@@ -629,6 +630,54 @@ button, input, select, textarea {
 	text-decoration: underline;
 }
 
+.post-comments{
+}
+
+.post-comments ul.comments{
+
+}
+
+ul.comments li.comment{
+}
+
+ul.comments li.comment:after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+.comment img{
+	display: block;
+	border-radius: 0.2rem;
+	float:left;
+	width: 32px;
+	margin-right: 5px;
+}
+.comment .comment-content{
+	display: block;
+	margin-top: 5px;
+}
+.comment .comment-content span,
+.comment .comment-content p{
+	display: inline-block;
+}
+
+.comment .comment-content span a{
+	text-decoration: none;
+	font-weight: bold;
+	color: #45c8dc;
+	margin-right: 15px;
+}
+
+.comment .comment-content span a:hover{
+	text-decoration: none;
+	color: #45c8dc;
+}
+
+.comment .comment-content p{
+
+	font-size: 0.95rem;
+}
 
 /* Dropdowns */
 

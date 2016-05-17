@@ -4,6 +4,8 @@ from django.db import models
 from authentication.models import Account
 from embed_video.fields import EmbedVideoField
 
+from chat.models import Room
+
 POST_TYPE_CHOICES = (
     ('i','image'),
     ('v','video'),
@@ -57,6 +59,9 @@ class Posts(models.Model):
             return 'image post'
         else:
             return self.message
+
+    def comments(self):
+        return Room.objects.get_for_object(self)
 
     def save(self, *args, **kwargs):
         super(Posts, self).save(*args, **kwargs)

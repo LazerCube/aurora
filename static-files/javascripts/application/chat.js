@@ -25,6 +25,7 @@ $(function() {
              type : "POST",
              data : {   room_id : $('#returntoken').val(),
                         message : $('#inputMessage').val(),
+                        response: true,
                     },
 
              // Successful response

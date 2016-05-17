@@ -1,0 +1,10 @@
+{% with p.comments as chatroom %}
+{% if chatroom.messages %}
+    <li class="post-block post-comments">
+        {% include 'chat/includes/comments.html' %}
+    </li>
+{% endif %}
+<li class="post-block post-content">
+    {% include 'chat/forms/chat_input.html' %}
+</li>
+{% endwith %}

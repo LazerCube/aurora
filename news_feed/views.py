@@ -8,6 +8,8 @@ from models import Posts
 from forms import StatusPostForm
 from activity.signals import action
 
+from chat.models import Room
+
 @login_required
 def home(request):
     form = StatusPostForm()
@@ -22,7 +24,10 @@ def home(request):
                 post = Posts.objects.create_post(author=request.user, message=message)
             else:
                 post = Posts.objects.video_post(video, author=request.user, message=message)
+
             post.save()
+            Room.objects.get_or_create(post, name="post-comments", desc="post comments")
+            #Room.objects.get_or_create(post)
             action.send(request.user, verb='posted', target=post)
             return redirect('news_feed:index')
 
