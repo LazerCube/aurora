@@ -74,7 +74,6 @@ class Account(AbstractBaseUser, PermissionsMixin):
     def get_short_name(self):
         return self.first_name
 
-
 def get_anonymous_user_instance(User):
     return User(username='Anonymous',
                 first_name='Anonymous',

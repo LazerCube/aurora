@@ -9,11 +9,20 @@ from forms import StatusPostForm
 from activity.signals import action
 
 from chat.models import Room
+from friends.models import Friend
+
+from django.db.models import Q
 
 @login_required
 def home(request):
     form = StatusPostForm()
-    posts = Posts.objects.all().order_by('-created_at')
+    friends = Friend.objects.friends(request.user)
+
+    qs = Q()
+    for friend in friends:
+        qs = qs | Q(author=friend)
+    qs = qs | Q(author=request.user)
+    posts = Posts.objects.filter(qs).order_by('-created_at')
 
     if request.method == 'POST':
         form = StatusPostForm(request.POST)

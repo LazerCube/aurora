@@ -15,11 +15,6 @@ POST_TYPE_CHOICES = (
 )
 
 class PostManager(models.Manager):
-    # def create_post(self, type, author, message, **kwargs):
-    #     '''Function for creating posts'''
-    #     p = self.model(author=author, type=type, message=message)
-    #     p.save()
-
     def create_post(self, *args, **kwargs):
         if not 'type' in kwargs:
             kwargs['type'] = 'u'
