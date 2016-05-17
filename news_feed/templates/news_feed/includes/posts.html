@@ -25,6 +25,19 @@
                                 {{ p.message }}
                             </p>
                         </li>
+                        <li class="post-block post-content">
+                            <p>
+                                {% load embed_video_tags %}
+
+                                The video tag:
+                                    {% video p.video as my_video %}
+                                        URL: {{ my_video.url }}
+                                        Thumbnail: {{ my_video.thumbnail }}
+                                        Backend: {{ my_video.backend }}
+                                    {% video my_video '100% x 100%' %}
+                                {% endvideo %}
+                            </p>
+                        </li>
                     </ul>
                 </div>
             </div>

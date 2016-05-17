@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 from django.db import models
 
 from authentication.models import Account
+from embed_video.fields import EmbedVideoField
 
 POST_TYPE_CHOICES = (
     ('i','image'),
@@ -33,7 +34,7 @@ class Posts(models.Model):
     type = models.CharField(max_length=1, choices=POST_TYPE_CHOICES, db_index=True)
 
     message = models.TextField()
-    source = models.URLField(blank=True, null=True) #URL content to be embedded.
+    video = EmbedVideoField(blank=True, null=True) #URL content to be embedded.
     likes = models.PositiveIntegerField(default=0)
 
     #picture =
