@@ -13,7 +13,7 @@ from chat.models import Room
 @login_required
 def home(request):
     form = StatusPostForm()
-    posts = Posts.objects.all()
+    posts = Posts.objects.all().order_by('-created_at')
 
     if request.method == 'POST':
         form = StatusPostForm(request.POST)
