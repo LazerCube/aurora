@@ -9,8 +9,8 @@
     <div class="dropdown">
         <span><i class="fa fa-angle-down dropdown"></i></span>
         <ul class="dropdown-content">
-            <li><a href="#">Edit</a></li>
-            <li><a href="#">Delete</a></li>
+            <li><a href="{% url 'news_feed:view_post' p.pk %}">Direct Link</a></li>
+            <li><a href="{% url 'news_feed:delete_post' p.pk %}">Delete</a></li>
             <li><a href="#">Settings</a></li>
         </ul>
     </div>
