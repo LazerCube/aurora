@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 
 from authentication.models import Account
 from activity.models import Activity
@@ -47,6 +48,8 @@ def home(request):
 
     return render(request, 'news_feed/home.html', context)
 
+#will be allowed to view by non logged in
+@login_required
 def view_post(request, post_id):
     post = get_object_or_404(Posts, pk=post_id)
 
@@ -56,9 +59,13 @@ def view_post(request, post_id):
 
     return render(request, 'news_feed/post_view.html', context)
 
-
+@login_required
 def delete_post(request, post_id):
     post = get_object_or_404(Posts, pk=post_id)
-    post.delete()
+
+    if request.user == post.author:
+        post.delete()
+    else:
+        raise PermissionDenied
 
     return redirect('news_feed:index')

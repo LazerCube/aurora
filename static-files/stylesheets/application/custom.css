@@ -7,6 +7,12 @@
 	margin-right: 0px;
 }
 
+.clear-fix:after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
 .dont-break-out{
 	overflow-wrap: break-word;
 	word-wrap: break-word;
