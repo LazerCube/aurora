@@ -1,5 +1,9 @@
 {% with p.comments as chatroom %}
 {% if chatroom.messages %}
+    <li class="post-block post-content post-info">
+        <span>0 Like this.</span>
+        <span style="float:right;">{{ chatroom.message_num }} Comments.</span>
+    </li>
     <li class="post-block post-comments">
         {% include 'chat/includes/comments.html' %}
     </li>
