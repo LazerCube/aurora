@@ -6,7 +6,7 @@ from . import views
 urlpatterns = [
     url(r'^', include('authentication.urls')),
     url(r'^', include('user_profiles.urls')),
-    url(r'^home/', include('news_feed.urls')),
+    url(r'^', include('news_feed.urls')),
     url(r'^friends/', include('friends.urls')),
     url(r'^messages/', include('chat.urls')),
     url(r'^$', views.index, name='index'),

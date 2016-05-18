@@ -46,3 +46,19 @@ def home(request):
     }
 
     return render(request, 'news_feed/home.html', context)
+
+def view_post(request, post_id):
+    post = get_object_or_404(Posts, pk=post_id)
+
+    context = {
+        'p': post,
+    }
+
+    return render(request, 'news_feed/post_view.html', context)
+
+
+def delete_post(request, post_id):
+    post = get_object_or_404(Posts, pk=post_id)
+    post.delete()
+
+    return redirect('news_feed:index')

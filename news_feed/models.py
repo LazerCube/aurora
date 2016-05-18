@@ -58,5 +58,10 @@ class Posts(models.Model):
     def comments(self):
         return Room.objects.get_for_object(self)
 
+    def delete(self, *args, **kwargs):
+        comments = self.comments()
+        comments.delete()
+        super(Posts, self).delete(*args, **kwargs)
+
     def save(self, *args, **kwargs):
         super(Posts, self).save(*args, **kwargs)
