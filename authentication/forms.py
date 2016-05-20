@@ -1,6 +1,30 @@
 from django import forms
 from authentication.models import Account
 
+import StringIO
+from PIL import Image
+
+class EditForm(forms.Form):
+    avatar = forms.ImageField()
+
+    def clean_avatar(self):
+        size = 128, 128
+        image_field = self.cleaned_data['avatar']
+        image_file = StringIO.StringIO(image_field.read())
+
+        image = Image.open(image_file)
+
+        w,h = image.size
+        image = image.resize(size, Image.ANTIALIAS)
+        #image = image.thumbnail(size, Image.ANTIALIAS)
+        image_file = StringIO.StringIO()
+        image.save(image_file, 'JPEG', quality=90)
+
+        image_field.file = image_file
+        avatar = image_field
+
+        return avatar
+
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={'id' : 'inputUsername',
                                                              'class' : 'form-input',
@@ -52,6 +76,3 @@ class RegisterForm(forms.Form):
         if Account.objects.filter(email=email).exists():
             raise forms.ValidationError('The Email, %s is already in use.' % email)
         return email
-
-class EditForm(forms.Form):
-    profile_picture = forms.ImageField()
