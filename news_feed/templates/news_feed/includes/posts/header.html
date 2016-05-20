@@ -1,7 +1,7 @@
 <li class="post-block post-content post-header">
     <div class="post-header-container clear-fix">
         <a href="{% url 'user_profile:index' p.author.username %}">
-            <img src="http://placehold.it/32/45c8dc/45c8dc" alt="img" height="36" width="36">
+            <img src="{{ p.author.avatar.url }}" alt="user profile image">
             {{ p.author.username}}
         </a>
         <div class="header-timestamp">{{ p.created_at }}<i class="fa fa-globe"></i></div>

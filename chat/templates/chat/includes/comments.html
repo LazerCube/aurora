@@ -1,7 +1,7 @@
 <ul class="comments">
     {% for c in chatroom.messages %}
     <li class="comment post-block post-content">
-        <img src="http://placehold.it/32/45c8dc/45c8dc" alt="img" height="100%" width="100%">
+        <img src="{{ c.author.avatar.url }}" alt="user profile image" height="100%" width="100%">
         <div class="comment-content">
             <span>
                 <a href="#">{{ c.author.username }}</a>

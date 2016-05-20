@@ -558,6 +558,7 @@ button, input, select, textarea {
 	width: 42px;
 	margin: 0px;
 	margin-right: 20px;
+	border: 1px solid #dadbdf;
 }
 
 .post-header a img {
@@ -656,8 +657,9 @@ ul.comments li.comment:after {
 	display: block;
 	border-radius: 0.2rem;
 	float:left;
-	width: 32px;
+	width: 34px;
 	margin-right: 5px;
+	border: 1px solid #dadbdf;
 }
 .comment .comment-content{
 	display: block;
