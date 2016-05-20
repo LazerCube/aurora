@@ -6,9 +6,35 @@
             <div class="col-lg-4">
                 <div class="card">
                     <div class="card-content">
-                        <span class="card-title"><a href="{% url 'user_profile:index' user.username %}">{{ user.username }}:</a> Profile Info</span>
+                        <span class="card-title">
+                            <a href="{% url 'user_profile:index' user.username %}">{{ user.username }}:</a>
+                            <small>Profile Info</small>
+                        </span>
+                        <p>
+                            <ul>
+                                <li><b>Full Name:</b> {{ user.get_full_name }}</li>
+                                <li><b>Short Name:</b> {{ user.get_short_name }}</li>
+                                <li><b>Username:</b> {{ user.username }}</li>
+                                <li><b>Email:</b> {{ user.email }}</li>
+                            </ul>
+                            <ul style="margin-top:15px;">
+                                <li><b>Joined:</b> {{ user.created_at }}</li>
+                                <li><b>Last Update:</b> {{ user.updated_at }}</li>
+                            </ul>
+                        </p>
                     </div>
                 </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="{{ user.avatar }}" alt=""/>
+                        <span class="card-title">Avatar</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                {% include 'authentication/forms/avatar_form.html' %}
             </div>
         </div>
     </div>

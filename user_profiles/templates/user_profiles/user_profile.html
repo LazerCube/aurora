@@ -29,7 +29,15 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-content">
-                                            <h2>{% if has_permission %}<b>Hello,</b>{% endif %} {{ user.username }}{% if has_permission %}<br><small>You can edit this page!</small>{% endif %}</h2>
+                        <h2>
+                            <ul>
+                                {% if has_permission %}<li><b>Hello,</b>{% endif %} {{ user.username }}</li>
+                                {% if has_permission %}
+                                    <li><small>You can edit this page!</small></li>
+                                    <li><small><a href="{% url 'user_profile:edit' %}">Edit</a></small></li>
+                                {% endif %}
+                            </ul>
+                        </h2>
                     </div>
                     <div class="card-block">
                             <ul>

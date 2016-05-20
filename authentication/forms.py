@@ -38,7 +38,6 @@ class RegisterForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput(attrs={'id' : 'inputPassword',
                                                              'class' : 'form-input',
                                                              'placeholder' : 'Password'}))
-
     class Meta:
         model = Account
 
@@ -53,3 +52,6 @@ class RegisterForm(forms.Form):
         if Account.objects.filter(email=email).exists():
             raise forms.ValidationError('The Email, %s is already in use.' % email)
         return email
+
+class EditForm(forms.Form):
+    profile_picture = forms.ImageField()

@@ -9,6 +9,8 @@ from authentication.models import Account
 from news_feed.forms import StatusPostForm
 from activity.models import Activity
 
+from authentication.forms import EditForm
+
 @login_required
 def profile(request, username):
 
@@ -40,10 +42,22 @@ def profile(request, username):
 
 @login_required
 def edit(request):
-    profile = get_object_or_404(Account, request.user)
+    form = EditForm()
+    profile = get_object_or_404(Account, pk=request.user.pk)
+
+    if request.method == 'POST':
+        form = EditForm(request.POST, request.FILES)
+        if form.is_valid():
+            avatar = form.cleaned_data['avatar']
+
+            profile.avatar = avatar
+            profile.save()
+
+            return redirect('user_profile:edit')
 
     context = {
         'user': profile,
+        'form': form,
     }
 
     return render(request, 'user_profiles/edit.html', context)
