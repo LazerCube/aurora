@@ -1,0 +1,15 @@
+{% extends "web_application/base.html" %}
+
+{% block content %}
+    <div class="profile-info">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title"><a href="{% url 'user_profile:index' user.username %}">{{ user.username }}:</a> Profile Info</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

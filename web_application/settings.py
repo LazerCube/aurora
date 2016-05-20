@@ -66,6 +66,9 @@ STATIC_URL = '/static/' #specifies what url should static files map to under
 STATIC_ROOT = (os.path.join(BASE_DIR, 'static')) # This setting specifies where Django will copy all the static files to
 STATIC_TEMPLATES = (os.path.join(BASE_DIR, 'templates/'))
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 
 TEMPLATES = [
     {

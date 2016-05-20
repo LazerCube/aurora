@@ -7,6 +7,11 @@ from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.db.models import Q
 
+import os
+
+def get_image_path(instance, filename):
+    return os.path.join('avatars', str(instance.id), filename)
+
 class AccountManager(BaseUserManager):
     def create_user(self, email,password=None, **kwargs):
         if not email:
@@ -53,10 +58,10 @@ class Account(AbstractBaseUser, PermissionsMixin):
 
     first_name = models.CharField(max_length=32, blank=True)
     second_name = models.CharField(max_length=32, blank=True)
-    tagline = models.CharField(max_length=128,blank=True)
+
+    avatar = ImageField(upload_to=get_image_path, blank=True, null=True)
 
     is_admin = models.BooleanField(default=False) # Are they an admin?
-
     created_at = models.DateTimeField(auto_now_add=True) #When object was created
     updated_at = models.DateTimeField(auto_now=True) #When object was last updated
 
@@ -67,6 +72,9 @@ class Account(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.username
+
+    def set_avatar(self):
+        pass
 
     def get_full_name(self):
         return ' '.join([self.first_name, self.second_name])

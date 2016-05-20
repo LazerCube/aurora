@@ -39,6 +39,16 @@ def profile(request, username):
     return render(request, 'user_profiles/user_profile.html', context)
 
 @login_required
+def edit(request):
+    profile = get_object_or_404(Account, request.user)
+
+    context = {
+        'user': profile,
+    }
+
+    return render(request, 'user_profiles/edit.html', context)
+
+@login_required
 def search(request):
     results = None
     if request.method == 'GET':
