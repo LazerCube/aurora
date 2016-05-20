@@ -319,9 +319,9 @@ ul.friends li.friend a:hover{
 
 .friend-container .friend-img{
 	float:left;
-	height: 30px;
-	position: relative;
-	width:30;
+	height: 32px;
+	width:32px;
+	border: 1px solid #dadbdf;
 }
 
 .friend-container .friend-text{

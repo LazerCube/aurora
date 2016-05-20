@@ -5,7 +5,7 @@
             <a href='{% url 'user_profile:index' f.username %}'>
                 <div class="friend-container">
                     <div class="friend-img">
-                        <img src="http://placehold.it/32/45c8dc/45c8dc" alt="img" height="30" width="30"/>
+                        <img src="{{ f.avatar.url }}" alt="user profile image">
                     </div>
                     <div class="friend-text">
                         {{ f.username }}
