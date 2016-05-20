@@ -59,7 +59,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=32, blank=True)
     second_name = models.CharField(max_length=32, blank=True)
 
-    avatar = ImageField(upload_to=get_image_path, blank=True, null=True)
+    avatar = models.ImageField(upload_to=get_image_path, blank=True, null=True)
 
     is_admin = models.BooleanField(default=False) # Are they an admin?
     created_at = models.DateTimeField(auto_now_add=True) #When object was created
