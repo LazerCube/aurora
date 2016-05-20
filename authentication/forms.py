@@ -4,26 +4,33 @@ from authentication.models import Account
 import StringIO
 from PIL import Image
 
+from user_profiles.extras import make_thumbnail
+
 class EditForm(forms.Form):
     avatar = forms.ImageField()
 
     def clean_avatar(self):
-        size = 128, 128
-        image_field = self.cleaned_data['avatar']
-        image_file = StringIO.StringIO(image_field.read())
+        # size = 128, 128
+        # image_field = self.cleaned_data['avatar']
+        # image_file = StringIO.StringIO(image_field.read())
+        #
+        # image = Image.open(image_file)
+        #
+        # w,h = image.size
+        # image = image.resize(size, Image.ANTIALIAS)
+        # #image = image.thumbnail(size, Image.ANTIALIAS)
+        # image_file = StringIO.StringIO()
+        # image.save(image_file, 'JPEG', quality=90)
+        #
+        # image_field.file = image_file
+        # avatar = image_field
 
-        image = Image.open(image_file)
+        avatar_field = self.cleaned_data['avatar']
+        avatar_file = StringIO.StringIO(avatar_field.read())
 
-        w,h = image.size
-        image = image.resize(size, Image.ANTIALIAS)
-        #image = image.thumbnail(size, Image.ANTIALIAS)
-        image_file = StringIO.StringIO()
-        image.save(image_file, 'JPEG', quality=90)
+        avatar_field.file = make_thumbnail(avatar_file)
 
-        image_field.file = image_file
-        avatar = image_field
-
-        return avatar
+        return avatar_field
 
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={'id' : 'inputUsername',

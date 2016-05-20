@@ -59,7 +59,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=32, blank=True)
     second_name = models.CharField(max_length=32, blank=True)
 
-    avatar = models.ImageField(upload_to=get_image_path, blank=True, null=True)
+    avatar = models.ImageField(upload_to=get_image_path, default='/static/images/defaults/default-avatar.png')
 
     is_admin = models.BooleanField(default=False) # Are they an admin?
     created_at = models.DateTimeField(auto_now_add=True) #When object was created
@@ -73,8 +73,9 @@ class Account(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.username
 
-    def set_avatar(self):
-        pass
+    def set_avatar(self, avatar):
+        self.avatar = avatar
+        self.save()
 
     def get_full_name(self):
         return ' '.join([self.first_name, self.second_name])

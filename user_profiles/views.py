@@ -49,9 +49,7 @@ def edit(request):
         form = EditForm(request.POST, request.FILES)
         if form.is_valid():
             avatar = form.cleaned_data['avatar']
-
-            profile.avatar = avatar
-            profile.save()
+            profile.set_avatar(avatar)
 
             return redirect('user_profile:edit')
 
