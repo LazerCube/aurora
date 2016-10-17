@@ -1,4 +1,6 @@
-# Website application - Social network
+# This project is no longer being worked on and is being replaced by the Ceres project. [Ceres api][0] and [Ceres app][1]
+
+# Aurora - Social network
 
 Social networking website written in python using the Django framework.
 
@@ -60,3 +62,7 @@ Social networking website written in python using the Django framework.
 *   New messages take too long to show for the sending user.
 *   Current menu for posts doesn't work on mobile. (Needs replacing anyway)
 *   Long comments go under the authors name in posts.
+
+
+[0]: https://github.com/LazerCube/ceres_api
+[1]: https://github.com/LazerCube/ceres_app
